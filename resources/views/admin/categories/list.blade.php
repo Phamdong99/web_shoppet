@@ -11,6 +11,7 @@
                 <tr>
                     <th width="5px">ID</th>
                     <th>Tên danh mục</th>
+                    <th>Danh mục cha</th>
                     <th>ảNH</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
@@ -25,6 +26,7 @@
                 <tr>
                     <th width="5px">ID</th>
                     <th>Tên danh mục</th>
+                    <th>Danh mục cha</th>
                     <th>ảNH</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
