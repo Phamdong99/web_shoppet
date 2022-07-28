@@ -1,9 +1,8 @@
-@extends('main')
+@extends('admin.main')
 
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
@@ -66,7 +65,6 @@
                 </div>
                 <!-- ./col -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 @endsection

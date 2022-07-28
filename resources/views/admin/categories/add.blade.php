@@ -14,7 +14,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form>
+                        <form action="" method="post">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tên danh mục</label>
@@ -63,6 +63,7 @@
                                     <button type="submit" class="btn btn-primary">Tạo danh mục</button>
                                 </div>
                             </div>
+                            @csrf
                         </form>
                     </div>
                     <!-- /.card -->

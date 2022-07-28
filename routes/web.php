@@ -19,14 +19,17 @@ Route::get('/',[LoginController::class, 'index']);
 Route::get('admin/login',[LoginController::class, 'index'])->name('login');
 Route::post('admin/login/store',[LoginController::class, 'store']);
 
+
 Route::middleware(['auth'])->group(function (){
     Route::prefix('admin')->group(function (){
 
-        Route::get('main',[MainController::class, 'index']);
-            #categories
+        Route::get('main', [MainController::class, 'index']);
+
+        #categories
         Route::prefix('categories')->group(function (){
             Route::get('list', [CategoryController::class, 'index']);
             Route::get('add', [CategoryController::class, 'create']);
+            Route::post('add', [CategoryController::class, 'store']);
         });
     });
 });
