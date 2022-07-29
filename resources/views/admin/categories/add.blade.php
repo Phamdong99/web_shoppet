@@ -1,7 +1,9 @@
 @extends('admin.main')
 
+@section('head')
+    <script src="/template/ckeditor/ckeditor.js"></script>
+@endsection
 @section('content')
-
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -24,6 +26,9 @@
                                     <label>Danh mục cha</label>
                                    <select class="form-control" name="parent_id" id="parent_id">
                                        <option value="0">Danh mục cha</option>
+                                       @foreach($categories as $key => $category)
+                                           <option value="{{$category->id}}">{{$category->name}}</option>
+                                       @endforeach
                                    </select>
                                 </div>
                                 <div class="form-group">
@@ -71,4 +76,11 @@
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
+@endsection
+@section('footer')
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace( 'content' );
+    </script>
 @endsection

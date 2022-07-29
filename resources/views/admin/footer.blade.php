@@ -5,6 +5,8 @@
 <!-- AdminLTE App -->
 <script src="/template/admin/dist/js/adminlte.min.js"></script>
 
+<script src="/template/admin/js/main.js"></script>
+
 <!-- jQuery -->
 <script src="/template/admin/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -56,6 +58,7 @@
 <!-- AdminLTE App -->
 <script src="/template/admin/dist/js/adminlte.min.js"></script>
 <!-- Page specific script -->
+
 <script>
     $(function () {
         $("#example1").DataTable({
@@ -73,3 +76,4 @@
         });
     });
 </script>
+@yield('footer')

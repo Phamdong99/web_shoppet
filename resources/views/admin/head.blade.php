@@ -39,3 +39,7 @@
 <link rel="stylesheet" href="/template/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="/template/admin/dist/css/adminlte.min.css">
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+@yield('head')

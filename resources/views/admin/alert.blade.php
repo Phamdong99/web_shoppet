@@ -1,3 +1,4 @@
+{{--Báo lỗi từ form request--}}
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
