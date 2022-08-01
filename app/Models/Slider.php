@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Slider extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'url',
+        'file',
+        'sort_by',
+        'active'
+    ];
 }

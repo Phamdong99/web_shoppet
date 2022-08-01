@@ -59,7 +59,22 @@
                         </p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="/admin/sliders/list" class="nav-link">
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>
+                            Sliders
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/products/list" class="nav-link">
+                        <i class="nav-icon fab fa-product-hunt"></i>
+                        <p>
+                            Sản phẩm
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
