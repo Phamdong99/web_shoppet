@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +36,17 @@ Route::middleware(['auth'])->group(function (){
             Route::post('edit/{category}', [CategoryController::class, 'update']);
             Route::DELETE('destroy', [CategoryController::class, 'destroy']);
         });
+        #product
+        Route::prefix('products')->group(function (){
+            Route::get('list', [ProductController::class, 'index']);
+            Route::get('add', [ProductController::class, 'create']);
+            Route::post('add', [ProductController::class, 'store']);
+            Route::get('edit/{product}', [ProductController::class, 'show']);
+            Route::post('edit/{product}', [ProductController::class, 'update']);
+            Route::DELETE('destroy', [ProductController::class, 'destroy']);
+        });
+        #upload
+        Route::post('upload/services', [UploadController::class, 'store']);
     });
 });
 

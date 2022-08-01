@@ -9,8 +9,15 @@ use App\Services\UploadService;
 class UploadController extends Controller
 {
     protected $uploadService;
+
     public function __construct(UploadService $uploadService)
     {
         $this->uploadService = $uploadService;
+    }
+
+    public function store(Request $request)
+    {
+        $this->uploadService->store($request);
+
     }
 }

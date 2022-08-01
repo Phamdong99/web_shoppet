@@ -52,8 +52,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/admin/products/list" class="nav-link">
+                        <i class="nav-icon fab fa-product-hunt"></i>
+                        <p>
+                            Sản phẩm
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-copy"></i>
+                        <i class="nav-icon fas fa-product-hunt"></i>
                         <p>
                             Layout Options
                             <i class="fas fa-angle-left right"></i>

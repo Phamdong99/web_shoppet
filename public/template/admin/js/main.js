@@ -3,7 +3,7 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-
+// delete
 function removeRow(id, url)
 {
     if(confirm('Bạn có chắc chắn muốn xoá mục này?')){
@@ -32,3 +32,34 @@ function removeRow(id, url)
     }
 }
 
+// upload
+
+$('#upload').change(function (){
+    //khởi tạo form
+    const form = new FormData();
+    var ins = document.getElementById('upload').files.length;
+    for (var x = 0; x < ins; x++) {
+        form.append("file[]", document.getElementById('upload').files[x]);
+    }
+    //append
+    // form.append('file[]',$(this)[0].files[0]);
+    console.log(form.getAll('file[]'))
+    $.ajax({
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        datatype: 'JSON',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            Accept : 'Application/json'
+        },
+        data: form,
+        url: '/admin/upload/services',
+        success: function (result){
+            console.log(result);
+        },
+        error: function (error) {
+        console.log(error)
+        }
+    })
+})
