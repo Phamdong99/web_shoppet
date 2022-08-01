@@ -11,13 +11,23 @@ class UploadService
     {
         $files = $request->file('file');
         foreach ($files as $file){
-            $name = $file->getClientOriginalName();
+
             if ($request->hasFile('file')) {
-                $path = $file->storeAs(
-                    'uploads/' . date('y/m/d'), $name);
+                try{
+                    $name = $file->getClientOriginalName();
+                    $pathFull = 'uploads/' . date('y/m/d');
+
+                    $path = $file->storeAs(
+                        'public/'. $pathFull , $name
+                    );
+
+                    return '/storage/'. $pathFull .'/'.$name;
+                }catch (\Exception $err){
+                    return false;
+                }
+
+
             }
         }
-
-        return response()->json(['msg' => $request->hasFile('file')], 200);
     }
 }

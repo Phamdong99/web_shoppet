@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\CreateFormRequest;
+use App\Models\Product;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -33,6 +35,37 @@ class ProductController extends Controller
     public function store(CreateFormRequest $request)
     {
         $this->productService->create($request);
-        return redirect('admin/products/list');
+        return redirect()->back();
+    }
+
+    public function show(Product $product)
+    {
+        return view('admin.products.edit', [
+           'title'=>'Cập nhật sản phẩm',
+            'product'=>$product,
+            'categories'=>$this->productService->getCate()
+
+        ]);
+    }
+    public function update(CreateFormRequest $request, Product $product)
+    {
+       $this->productService->update($request, $product);
+       return redirect('admin/products/list');
+    }
+
+    public function destroy(Request $request)
+    {
+
+       $result = $this->productService->destroy($request);
+
+        if($result){
+            return \response()->json([
+                'error'=>false,
+                'message'=>'Xoá danh mục thành công'
+            ]);
+        }
+        return \response()->json([
+            'error'=>true
+        ]);
     }
 }

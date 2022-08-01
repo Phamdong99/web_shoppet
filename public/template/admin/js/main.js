@@ -56,7 +56,14 @@ $('#upload').change(function (){
         data: form,
         url: '/admin/upload/services',
         success: function (result){
-            console.log(result);
+            if(result.error === false){
+                $('#image_show').html('<a href="'+ result.url +'" target="_blank">' +
+                    '<img src="'+ result.url +'" width="100px"></a>')
+
+                $('#file').val(result.url);
+            }else {
+                alert('Upload file lỗi');
+            }
         },
         error: function (error) {
         console.log(error)

@@ -16,7 +16,11 @@ class Helper
                 <tr>
                 <td>'. $category->id .'</td>
                 <td>'. $char . $category->name .'</td>
-                <td>'. $category->file.'</td>
+                <td>
+                             <a href='. $category->file .'  target="_blank">
+                               <img src='. $category->file .' height="40px" alt="">
+                             </a>
+                    </td>
                 <td>'. self::active($category->active) .'</td>
                 <td>'. $category->created_at .'</td>
                 <td>

@@ -24,7 +24,9 @@ class CreateFormRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required'
+            'name' => 'required',
+            'cate_id'=>'required',
+            'qty'=>'required'
         ];
 
         return $rules;
@@ -33,7 +35,9 @@ class CreateFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập thông tin tên sản phẩm'
+            'name.required' => 'Vui lòng nhập thông tin tên sản phẩm',
+            'cate_id.required'=>'vui lòng chọn danh mục cho sản phẩm',
+            'qty.required'=>'Vui lòng nhập số lượng còn trong cửa hàng'
         ];
     }
 }

@@ -19,4 +19,8 @@ class Product extends Model
         'active',
         'cate_id'
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'cate_id', 'id');
+    }
 }

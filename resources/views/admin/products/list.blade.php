@@ -24,13 +24,13 @@
                 @foreach($products as $key => $product)
                 <tr>
                     <td>{{ $product->id }}</td>
-                    <td>{{ $product->file }}</td>
+                    <td><img src="{{ $product->file }}" alt="" width="60px"></td>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->cate_id }}</td>
-                    <td>{{ $product->price }}</td>
-                    <td>{{ $product->price_sale }}</td>
+                    <td>{{ $product->category->name }}</td>
+                    <td>{{ number_format($product->price) }} Vnđ</td>
+                    <td>{{ number_format($product->price_sale) }} Vnđ</td>
                     <td>{{ $product->qty }}</td>
-                    <td>{{ $product->active }}</td>
+                    <td>{!! App\Helper\Helper::active($product->active) !!}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="/admin/products/edit/{{$product->id}}">
                             <i class="fas fa-edit"></i>

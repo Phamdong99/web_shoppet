@@ -25,7 +25,6 @@
                 <a href="#" class="nav-link">Contact</a>
             </li>
         </ul>
-
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -50,6 +49,24 @@
         @include('admin.alert')
         <!-- Main content -->
         <section class="content">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ $title }}</h3>
+                                </div>
+
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </section>
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <!-- /.row -->
