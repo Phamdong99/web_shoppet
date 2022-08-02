@@ -2,12 +2,18 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Session;
 
 class SliderService
 {
+    public function show()
+    {
+        return Slider::where('active', 1)->orderByDesc('sort_by')->get();
+    }
+
     public function create($request)
     {
 

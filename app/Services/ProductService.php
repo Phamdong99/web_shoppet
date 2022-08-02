@@ -5,9 +5,11 @@ namespace App\Services;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
+use Termwind\Components\Li;
 
 class ProductService
 {
+//    admin
     public function getAll()
     {
         return Product::where('active','1')->get();
@@ -24,7 +26,7 @@ class ProductService
             Session::flash('error','Giá giảm phải nhỏ hơn giá gốc. Vui lòng nhập lại');
             return false;
         }
-        if($request->input('price') != 0 && $request->input('price_sale') == 0){
+        if($request->input('price') == 0 && $request->input('price_sale') != 0){
 
             Session::flash('error','Vui lòng nhập giá gốc');
             return false;
@@ -86,5 +88,19 @@ class ProductService
         }
         return false;
     }
+//    Main Home
 
+//  load product
+    const LIMIT = 16;
+    public function get($page = null)
+    {
+        return Product::orderbyDesc('id')
+            ->where('active', 1)
+            ->when($page != null, function ($query) use ($page) {
+                $offset = $page * self::LIMIT;
+                $query->offset($offset);
+            })
+            ->limit(self::LIMIT)
+            ->get();
+    }
 }

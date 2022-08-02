@@ -3,14 +3,16 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class CategoryService
 {
+    //admin
     public function getAll()
     {
-        return Category::orderbyDesc('id')->paginate(10);
+        return Category::orderByDesc('id')->paginate(10);
     }
     public function getParent()
     {
@@ -60,5 +62,20 @@ class CategoryService
             return Category::where('id', $id)->orwhere('parent_id', $id)->delete();
         }
         return false;
+    }
+    //main home
+
+    public function showCate()
+    {
+        return Category::where('parent_id', 0)->get();
+    }
+
+    public function getId($id)
+    {
+        return Category::where('id',$id)->where('active',1)->firstOrFail();
+    }
+    public function getProduct($category)
+    {
+        return Category::with('products')->where('active',1)->orderByDesc('id')->paginate(12);
     }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\Main\MainHomeController;
+use App\Http\Controllers\Main\CategoryHomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[LoginController::class, 'index']);
 Route::get('admin/login',[LoginController::class, 'index'])->name('login');
 Route::post('admin/login/store',[LoginController::class, 'store']);
 
@@ -60,3 +61,7 @@ Route::middleware(['auth'])->group(function (){
     });
 });
 
+Route::get('/', [MainHomeController::class, 'index']);
+
+Route::get('/danh-muc/{id}-{slug}.html', [CategoryHomeController::class, 'index']);
+Route::post('/services/load-product',[MainHomeController::class, 'loadProduct']);

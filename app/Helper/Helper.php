@@ -3,9 +3,11 @@
 namespace App\Helper;
 
 use http\Exception\BadMessageException;
+use Illuminate\Support\Str;
 
 class Helper
 {
+//    Load danh mục phía admin
     public static function category($categories, $parent_id = 0, $char = '')
     {
         $html  = '';
@@ -49,5 +51,50 @@ class Helper
     {
         return $active == 0 ? '<span class="btn btn-danger btn-xs">Không hoạt động</span>'
             : '<span class="btn btn-success btn-xs">Hoạt động</span>';
+    }
+//    Load danh mục bên trang chủ khách hàng
+    public static function categories($categories, $parent_id = 0)
+    {
+        $html = '';
+
+        foreach ($categories as $key => $category)
+        {
+            if($category->parent_id == $parent_id){
+                $html.='
+                    <li>
+                        <a href="/danh-muc/'. $category->id .'-'. Str::slug($category->name, '-').'.html">
+                            '.$category->name.'
+                        </a>';
+                        if(self::isChild($categories, $category->id))
+                        {
+                            $html .='<ul class="sub-menu">';
+                            $html .= self::categories($categories,$category->id);
+                            $html .='</ul>';
+                        }
+                        $html.='</li>
+                ';
+            }
+        }
+
+        return $html;
+    }
+//    Kiểm tra cấp 2 của danh mục
+    public static function isChild($categories, $id)
+    {
+        foreach ($categories as $key => $category)
+        {
+            if($category->parent_id == $id ){
+                return true;
+            }
+            return false;
+        }
+    }
+
+//    price
+    public static function price($price = 0, $price_sale = 0)
+    {
+        if($price_sale != 0) return number_format($price_sale).'Vnd';
+        if($price != 0) return number_format($price).'Vnd' ;
+        return '<a href="/lien-he.html">Liên Hệ</a>';
     }
 }

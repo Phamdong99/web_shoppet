@@ -27,8 +27,8 @@
                     <td><img src="{{ $product->file }}" alt="" width="60px"></td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->category->name }}</td>
-                    <td>{{ number_format($product->price) }} Vnđ</td>
-                    <td>{{ number_format($product->price_sale) }} Vnđ</td>
+                    <td>{{ number_format($product->price)}} </td>
+                    <td>{{ number_format($product->price_sale)}} </td>
                     <td>{{ $product->qty }}</td>
                     <td>{!! App\Helper\Helper::active($product->active) !!}</td>
                     <td>

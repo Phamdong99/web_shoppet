@@ -17,4 +17,9 @@ class Category extends Model
         'active',
         'slug'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class,'cate_id', 'id');
+    }
 }
