@@ -224,6 +224,7 @@
                     </div>
                 </div>
                 @include('main.product')
+                {!! $products->links() !!}
             </div>
         </div>
     </div>

@@ -83,6 +83,7 @@ class ProductService
         $id = (int)$request->input('id');
 
         $product = Product::find($id);
+
         if($product){
             return Product::where('id', $id)->delete();
         }

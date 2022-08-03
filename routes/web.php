@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
@@ -56,6 +57,17 @@ Route::middleware(['auth'])->group(function (){
             Route::post('edit/{slider}', [SliderController::class, 'update']);
             Route::DELETE('destroy', [SliderController::class, 'destroy']);
         });
+
+        #contact
+        Route::prefix('contacts')->group(function (){
+            Route::get('list', [ContactController::class, 'index']);
+            Route::get('add', [ContactController::class, 'create']);
+            Route::post('add', [ContactController::class, 'store']);
+            Route::get('edit/{contact}', [ContactController::class, 'show']);
+            Route::post('edit/{contact}', [ContactController::class, 'update']);
+            Route::DELETE('destroy', [ContactController::class, 'destroy']);
+        });
+
         #upload
         Route::post('upload/services', [UploadController::class, 'store']);
     });

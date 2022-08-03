@@ -43,7 +43,7 @@
                         </li>
 
                         <li>
-                            <a href="about.html">Thông tin</a>
+                            <a href="about.html">Tin tức</a>
                         </li>
 
                         <li>

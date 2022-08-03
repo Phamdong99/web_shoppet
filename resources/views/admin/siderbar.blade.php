@@ -69,9 +69,25 @@
                 </li>
                 <li class="nav-item">
                     <a href="/admin/products/list" class="nav-link">
-                        <i class="nav-icon fab fa-product-hunt"></i>
+                        <i class="nav-icon fas fa-newspaper"></i>
                         <p>
-                            Sản phẩm
+                            Tin Tức
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/products/list" class="nav-link">
+                        <i class="nav-icon fab fa-alipay"></i>
+                        <p>
+                            Dịch Vụ
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/contacts/list" class="nav-link">
+                        <i class="nav-icon far fa-address-card"></i>
+                        <p>
+                            Liên Hệ
                         </p>
                     </a>
                 </li>

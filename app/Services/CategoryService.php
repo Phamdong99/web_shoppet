@@ -76,6 +76,9 @@ class CategoryService
     }
     public function getProduct($category)
     {
-        return Category::with('products')->where('active',1)->orderByDesc('id')->paginate(12);
+        return $category->product()
+            ->where('active',1)
+            ->orderByDesc('id')
+            ->paginate(12);
     }
 }
