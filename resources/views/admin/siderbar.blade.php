@@ -60,6 +60,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/admin/sizes/list" class="nav-link">
+                        <i class="nav-icon fas fa-clone"></i>
+                        <p>
+                            Size
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/admin/sliders/list" class="nav-link">
                         <i class="nav-icon fas fa-images"></i>
                         <p>

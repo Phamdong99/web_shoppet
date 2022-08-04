@@ -2,12 +2,11 @@
 
 namespace App\Http\View\Composers;
 
-use App\Models\Category;
+use App\Models\Contact;
 use Illuminate\View\View;
 
-class CategoryComposer
+class ContactComposer
 {
-
     protected $users;
 
     public function __construct()
@@ -17,7 +16,7 @@ class CategoryComposer
 
     public function compose(View $view)
     {
-        $categories = Category::where('active' ,1)->orderByDesc('id')->get();
-        $view->with('categories', $categories);
+        $contacts = Contact::where('active' ,1)->get();
+        $view->with('contacts', $contacts);
     }
 }

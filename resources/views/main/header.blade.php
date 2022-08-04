@@ -47,7 +47,7 @@
                         </li>
 
                         <li>
-                            <a href="contact.html">Liên hệ</a>
+                            <a href="/contacts">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
@@ -148,7 +148,7 @@
     <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
         <div class="container-search-header">
             <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                <img src="images/icons/icon-close2.png" alt="CLOSE">
+                <img src="/template/main/images/icons/icon-close2.png" alt="CLOSE">
             </button>
 
             <form class="wrap-search-header flex-w p-l-15">

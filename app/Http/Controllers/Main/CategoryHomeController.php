@@ -23,7 +23,6 @@ class CategoryHomeController extends Controller
 //        load sp theo danh mục
         $products = $this->categoryService->getProduct($category);
 
-
         return view('main.cate_product',[
            'title'=>$category->name,
             'products'=>$products,

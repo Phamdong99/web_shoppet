@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\View\Composers\CategoryComposer;
+use App\Http\View\Composers\ContactComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,5 +28,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer('main/header', CategoryComposer::class);
         View::composer('main/footer', CategoryComposer::class);
+        View::composer('main/footer', ContactComposer::class);
+
     }
 }
