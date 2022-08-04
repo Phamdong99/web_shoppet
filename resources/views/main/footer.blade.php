@@ -20,10 +20,13 @@
                 <h4 class="stext-301 cl0 p-b-30">
                     Liên Hệ
                 </h4>
-
-                <p class="stext-107 cl7 size-201">
-                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-                </p>
+                <ul>
+                    @foreach($contacts as $contact)
+                        <li>
+                            {{$contact->name}} : {{$contact->address}}-{{$contact->phone}}
+                        </li>
+                    @endforeach
+                </ul>
 
                 <div class="p-t-27">
                     <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">

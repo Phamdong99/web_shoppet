@@ -2,7 +2,6 @@
 
 namespace App\Helper;
 
-use http\Exception\BadMessageException;
 use Illuminate\Support\Str;
 
 class Helper
@@ -97,4 +96,5 @@ class Helper
         if($price != 0) return number_format($price).'Vnd' ;
         return '<a href="/lien-he.html">Liên Hệ</a>';
     }
+
 }

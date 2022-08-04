@@ -5,10 +5,12 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Main\MainHomeController;
 use App\Http\Controllers\Main\CategoryHomeController;
+use App\Http\Controllers\Main\ProductHomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,6 +70,14 @@ Route::middleware(['auth'])->group(function (){
             Route::DELETE('destroy', [ContactController::class, 'destroy']);
         });
 
+        #size
+        Route::prefix('sizes')->group(function (){
+            Route::get('list', [SizeController::class, 'index']);
+            Route::get('add', [SizeController::class, 'create']);
+            Route::post('add', [SizeController::class, 'store']);
+            Route::DELETE('destroy', [SizeController::class, 'destroy']);
+        });
+
         #upload
         Route::post('upload/services', [UploadController::class, 'store']);
     });
@@ -76,4 +86,6 @@ Route::middleware(['auth'])->group(function (){
 Route::get('/', [MainHomeController::class, 'index']);
 
 Route::get('/danh-muc/{id}-{slug}.html', [CategoryHomeController::class, 'index']);
+Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'index']);
 Route::post('/services/load-product',[MainHomeController::class, 'loadProduct']);
+Route::get('contacts',[ContactController::class, 'show_contact']);

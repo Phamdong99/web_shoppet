@@ -11,6 +11,10 @@ class ContactService
     {
         return Contact::where('active',1)->get();
     }
+    public function getContact()
+    {
+        return Contact::where('active',1)->where('id',1)->get();
+    }
     public function create($request)
     {
         try{

@@ -67,4 +67,13 @@ class ContactController extends Controller
         ]);
 
     }
+
+    public function show_contact()
+    {
+        return view('main.contact', [
+            'title'=>'Thông tin liên hệ',
+            'contacts'=>$this->contactService->getContact()
+        ]);
+    }
+
 }
