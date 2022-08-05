@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use App\Services\SliderService;
@@ -48,6 +49,16 @@ class MainHomeController extends Controller
         }
         return response()->json([
             'html' => ''
+        ]);
+    }
+
+    #tìm kiếm sản phẩm
+    public function search(Request $request)
+    {
+        $product = Product::where('name','like','%'.$request->search.'%')->get();
+        return view('main.search', [
+            'title'=>'Tìm kiếm',
+            'products'=>$product
         ]);
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\Main\CartHomeController;
 use App\Http\Controllers\Main\MainHomeController;
 use App\Http\Controllers\Main\CategoryHomeController;
 use App\Http\Controllers\Main\ProductHomeController;
@@ -89,6 +90,14 @@ Route::get('/danh-muc/{id}-{slug}.html', [CategoryHomeController::class, 'index'
 Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'index']);
 Route::post('/services/load-product',[MainHomeController::class, 'loadProduct']);
 Route::post('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'add_review']);
+
+Route::get('search', [MainHomeController::class, 'search'])->name('member.search');
+
+Route::post('add-cart', [CartHomeController::class, 'index']);
+Route::get('carts', [CartHomeController::class, 'show']);
+Route::post('update-cart', [CartHomeController::class, 'update']);
+Route::get('carts/delete/{id}', [CartHomeController::class, 'remove']);
+Route::post('carts', [CartHomeController::class, 'addCart']);
 
 
 Route::get('contacts',[ContactController::class, 'show_contact']);

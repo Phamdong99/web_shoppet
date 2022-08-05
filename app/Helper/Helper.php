@@ -92,9 +92,10 @@ class Helper
 //    price
     public static function price($price = 0, $price_sale = 0)
     {
-        if($price_sale != 0) return number_format($price_sale).'Vnd';
+        if($price_sale != 0) return '<strike style="color: #0c84ff">'.number_format($price).'Vnd'.'</strike>'
+            .'<br>'.number_format($price_sale).'Vnd';
         if($price != 0) return number_format($price).'Vnd' ;
-        return '<a href="/lien-he.html">Liên Hệ</a>';
+        return '<a href="/contacts">Liên Hệ</a>';
     }
 
 }

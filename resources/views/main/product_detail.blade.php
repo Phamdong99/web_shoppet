@@ -168,46 +168,52 @@
                            </p>
 
                            <!--  -->
-                           <div class="p-t-33">
-                               <div class="flex-w flex-r-m p-b-10">
-                                   <div class="size-203 flex-c-m respon6">
-                                       Size
-                                   </div>
+                               @if($product->price != 0)
+                                   <div class="p-t-33">
+                                       <form method="post" action="/add-cart">
+                                           <input type="hidden" name="pro_id" id="pro_id" value="{{$product->id}}">
+                                           <div class="flex-w flex-r-m p-b-10">
+                                               <div class="size-203 flex-c-m respon6">
+                                                   Size
+                                               </div>
 
-                                   <div class="size-204 respon6-next">
-                                       <div class="rs1-select2 bor8 bg0">
-                                           <select class="js-select2" name="time">
-                                               <option>Chọn size</option>
-                                               <option>Size S</option>
-                                               <option>Size M</option>
-                                               <option>Size L</option>
-                                               <option>Size XL</option>
-                                           </select>
-                                           <div class="dropDownSelect2"></div>
-                                       </div>
-                                   </div>
-                               </div>
-
-                               <div class="flex-w flex-r-m p-b-10">
-                                   <div class="size-204 flex-w flex-m respon6-next">
-                                       <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                           <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                               <i class="fs-16 zmdi zmdi-minus"></i>
+                                               <div class="size-204 respon6-next">
+                                                   <div class="rs1-select2 bor8 bg0">
+                                                       <select class="js-select2" name="time">
+                                                           <option>Chọn size</option>
+                                                           <option>Size S</option>
+                                                           <option>Size M</option>
+                                                           <option>Size L</option>
+                                                           <option>Size XL</option>
+                                                       </select>
+                                                       <div class="dropDownSelect2"></div>
+                                                   </div>
+                                               </div>
                                            </div>
 
-                                           <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                           <div class="flex-w flex-r-m p-b-10">
+                                               <div class="size-204 flex-w flex-m respon6-next">
+                                                   <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                                       <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                           <i class="fs-16 zmdi zmdi-minus"></i>
+                                                       </div>
 
-                                           <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                               <i class="fs-16 zmdi zmdi-plus"></i>
+                                                       <input class="mtext-104 cl3 txt-center num-product" type="number" name="num_product" value="1">
+
+                                                       <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                           <i class="fs-16 zmdi zmdi-plus"></i>
+                                                       </div>
+                                                   </div>
+
+                                                   <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                       Add to cart
+                                                   </button>
+                                               </div>
                                            </div>
-                                       </div>
-
-                                       <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                           Add to cart
-                                       </button>
+                                           @csrf
+                                       </form>
                                    </div>
-                               </div>
-                           </div>
+                               @endif
 
                            <!--  -->
                            <div class="flex-w flex-m p-l-100 p-t-40 respon7">
@@ -245,9 +251,16 @@
                            <li class="nav-item p-b-10">
                                <a class="nav-link" data-toggle="tab" href="#information" role="tab">Additional information</a>
                            </li>
-
+                           @php
+                           $count_review = 0;
+                           @endphp
+                            @foreach($reviews as $review)
+                                @php
+                               $count_review = $count_review + 1
+                               @endphp
+                           @endforeach
                            <li class="nav-item p-b-10">
-                               <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+                               <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews ({{ $count_review }})</a>
                            </li>
                        </ul>
 

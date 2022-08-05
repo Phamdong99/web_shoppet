@@ -20,7 +20,6 @@ class CartHomeController extends Controller
     public function index(Request $request)
     {
         $result = $this->cartService->create($request);
-
         if ($result === false) {
             return redirect()->back();
         }
