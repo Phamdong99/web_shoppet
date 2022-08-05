@@ -50,7 +50,4 @@ class MainHomeController extends Controller
             'html' => ''
         ]);
     }
-
-
-
 }
