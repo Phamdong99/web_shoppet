@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Review;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class ReviewService

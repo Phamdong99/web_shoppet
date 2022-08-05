@@ -26,4 +26,8 @@ class Product extends Model
     public function menu(){
         return $this->hasOne(Category::class, 'id', 'cate_id');
     }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'pro_id', 'id');
+    }
 }

@@ -88,4 +88,7 @@ Route::get('/', [MainHomeController::class, 'index']);
 Route::get('/danh-muc/{id}-{slug}.html', [CategoryHomeController::class, 'index']);
 Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'index']);
 Route::post('/services/load-product',[MainHomeController::class, 'loadProduct']);
+Route::post('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'add_review']);
+
+
 Route::get('contacts',[ContactController::class, 'show_contact']);
