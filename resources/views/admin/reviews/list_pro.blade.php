@@ -14,27 +14,20 @@
                 </tr>
                 </thead>
                 <tbody>
-{{--                    @foreach($sliders as $key => $slider)--}}
-{{--                        <tr>--}}
-{{--                            <td>{{ $slider->id }}</td>--}}
-{{--                            <td><img src="{{ $slider->file }}" alt="" width="60px"></td>--}}
-{{--                            <td>{{ $slider->name }}</td>--}}
-{{--                            <td>{{ $slider->url }}</td>--}}
-{{--                            <td>{{ $slider->sort_by }}</td>--}}
-{{--                            <td>{!! \App\Helper\Helper::active($slider->active) !!} </td>--}}
-{{--    --}}
-{{--    --}}
-{{--                            <td>--}}
-{{--                                <a class="btn btn-primary btn-sm" href="/admin/sliders/edit/{{$slider->id}}">--}}
-{{--                                    <i class="fas fa-edit"></i>--}}
-{{--                                </a>--}}
-{{--                                <a class="btn btn-danger btn-sm" href="#"--}}
-{{--                                   onclick="removeRow({{$slider->id}}, '/admin/sliders/destroy')">--}}
-{{--                                    <i class="fas fa-trash-alt"></i>--}}
-{{--                                </a>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                    @endforeach--}}
+                    @foreach($list_pro_reviews as $key => $pro_review)
+                        @if(isset($pro_review->reviews[0]))
+                        <tr>
+                            <td>{{ $pro_review->id }}</td>
+                            <td><img src="{{ $pro_review->file }}" alt="" width="60px"></td>
+                            <td>{{ $pro_review->name }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="/admin/reviews/review_detail/{{$pro_review->id}}">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        @endif
+                    @endforeach
                     </tbody>
 
             </table>

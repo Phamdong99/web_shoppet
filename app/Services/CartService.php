@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\Models\Cart;
+use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CartService
@@ -13,6 +16,7 @@ class CartService
     {
         $qty = (int)$request->input('num_product');
         $product_id = (int)$request->input('pro_id');
+
         if ($qty <= 0 || $product_id <= 0) {
             Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
             return false;
@@ -27,12 +31,11 @@ class CartService
             return true;
         }
         //ngược lại ta cập nhật số lượng cũ
-        //arr:exists de lay ra cai id
+        //arr:exists de lay ra cai id xem nó có tồn tại trong giỏ hàng k
         $exists = Arr::exists($carts, $product_id);
-//        Kiểm tra xem đã có sản phẩm đấy trong giỏ hàng chưa
+     //        Kiểm tra xem đã có sản phẩm đấy trong giỏ hàng chưa
         if ($exists) {
             $carts[$product_id] = $carts[$product_id] + $qty;
-            dd( $carts[$product_id]);
             //update session
             Session::put('carts', $carts);
             return true;
@@ -49,6 +52,7 @@ class CartService
         if (is_null($carts)) return [];
 //        Lấy id sản phẩm  từ cart
         $productId = array_keys($carts);
+
         return Product::where('active', 1)
             ->whereIn('id', $productId)
             ->get();
@@ -81,5 +85,68 @@ class CartService
 
         Session::put('carts', $carts);
         return true;
+    }
+
+    //Lưu cart vào db
+    public function addCart($request)
+    {
+        try {
+            DB::beginTransaction(); //khi chạy try mà gặp lỗi thì commit để tránh bị dư dữ liệu
+
+            $carts = Session::get('carts');
+            if(is_null($carts)) return false;
+
+//           Insert vào db customer
+
+            $customer = Customer::create([
+                'name' => $request->input('name'),
+                'phone' => $request->input('phone'),
+                'address' => $request->input('address'),
+                'email'=> $request->input('email'),
+                'content' => $request->input('content'),
+                'active' => $request->input(1)
+            ]);
+
+//            Insert vào db cart
+            $insert_cart = $this->infoProductCart($carts, $customer->id);
+            DB::commit();
+            Session::get('success', 'Đặt hàng thành công');
+//            Session::flush();
+            return $insert_cart;
+
+        }catch (\Exception $err){
+            DB::rollBack();
+            Session::get('error', $err->getMessage());
+        }
+        return false;
+    }
+    public function infoProductCart($carts, $customer_id)
+    {
+        $cart = Cart::create([
+            'cus_id'=>$customer_id,
+            'active' => 1
+        ]);
+
+//        $total = 0;
+//        Insert vào cart detail
+        foreach ($carts as $key => $item){
+            $product = $this->getDetailProduct($key);
+//            $qty_pro = $product->qty - $item;
+            $cart->cartdetails()->create([
+                'qty'=> $item,
+                'pro_id'=>$product->id,
+                'cart_id'=>$cart->id
+            ]);
+//            //update số lượng
+//
+//            $cart->cart_details[0]->products->update([
+//                'qty' => $qty_pro
+//            ]);
+        }
+    }
+    public function getDetailProduct($id)
+    {
+        return Product::where(['id' => $id, 'active' => 1])
+            ->first();
     }
 }

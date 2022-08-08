@@ -3,7 +3,6 @@
 @section('content')
     <form class="bg0 p-t-130 p-b-85" method="post">
         @include('admin.alert')
-
         @if (count($products) != 0)
             <div class="container">
                 <div class="row">
@@ -12,11 +11,10 @@
                             <div class="wrap-table-shopping-cart">
                                 @php $total = 0; @endphp
                                 <table class="table table-bordered table-striped" id="table_product">
-                                    <tbody>
                                     <tr class="table_head">
                                         <th class="column-1">
                                             <div class="checkbox">
-                                                <label><input type="checkbox" value=""></label>
+                                                <label><input id="check_all" type="checkbox" value=""></label>
                                             </div>
                                         </th>
                                         <th class="column-2">Ảnh</th>
@@ -26,7 +24,7 @@
                                         <th class="column-6">Tổng tiền</th>
                                         <th class="column-7">Xóa</th>
                                     </tr>
-
+                                    <tbody>
                                     @foreach($products as $key => $product)
                                         @php
                                             $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
@@ -34,10 +32,11 @@
                                             $total += $priceEnd;
                                         @endphp
                                         <input type="hidden" name="product_id[]" value="{{$product->id}}">
+                                        <body>
                                         <tr class="table_row">
                                             <td class="column-1">
                                                 <div class="checkbox" id="">
-                                                    <label><input type="checkbox" value=""></label>
+                                                    <label><input type="checkbox" value="{{$product->id}}"></label>
                                                 </div>
                                             </td>
                                             <td class="column-2">
@@ -48,20 +47,20 @@
                                             <td class="column-3">{{ $product->name }}</td>
                                             <td class="column-4">{{ number_format($price, 0, '', '.') }} VND</td>
                                             <td class="column-5">
-                                                    <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                            <i class="fs-16 zmdi zmdi-minus"></i>
-                                                        </div>
-
-                                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                               name="num_product[{{ $product->id }}]"
-                                                               value="{{ $carts[$product->id] }}"
-                                                               data-product-max="{{$product->qty_product}}">
-
-                                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                                        </div>
+                                                <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-minus"></i>
                                                     </div>
+
+                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                           name="num_product[{{ $product->id }}]"
+                                                           value="{{ $carts[$product->id] }}"
+                                                           data-product-max="{{$product->qty}}">
+
+                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-plus"></i>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td class="column-6">{{ number_format($priceEnd, 0, '', '.') }} VND</td>
                                             <td class="column-7">
@@ -70,11 +69,11 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                        </body>
                                     @endforeach
                                     </tbody>
                                 </table>
                             </div>
-
                             <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                                 <div class="flex-w flex-m m-r-20 m-tb-5">
                                     {{-- <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
@@ -148,7 +147,7 @@
                             </div>
                             <button id="check_out" name="check_out">Thanh toán</button>
                             <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="redirect">
-                                Thanh Toán VNPay
+                                Thanh Toán
                             </button>
                         </div>
                     </div>

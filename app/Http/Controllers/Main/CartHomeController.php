@@ -57,6 +57,9 @@ class CartHomeController extends Controller
 
     public function addCart(CreateFormRequest $request)
     {
-
+        $this->cartService->addCart($request);
+        return view('main.carts.history_order',[
+            'title'=> 'Lịch sử đặt hàng'
+        ]);
     }
 }

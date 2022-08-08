@@ -76,6 +76,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/admin/reviews/list" class="nav-link">
+                        <i class="nav-icon fas fa-comment"></i>
+                        <p>
+                            Đánh giá
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/admin/products/list" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>

@@ -35,4 +35,10 @@ class LoginController extends Controller
         Session::flash('error','Email hoặc mật khẩu không chính xác, vui lòng đăng nhập lại');
         return redirect()->back();
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('admin/login');
+    }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('admin/login',[LoginController::class, 'index'])->name('login');
 Route::post('admin/login/store',[LoginController::class, 'store']);
-
+Route::get('admin/logout',[LoginController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function (){
     Route::prefix('admin')->group(function (){
@@ -77,6 +78,12 @@ Route::middleware(['auth'])->group(function (){
             Route::get('add', [SizeController::class, 'create']);
             Route::post('add', [SizeController::class, 'store']);
             Route::DELETE('destroy', [SizeController::class, 'destroy']);
+        });
+
+        #review
+        Route::prefix('reviews')->group(function (){
+            Route::get('list', [ReviewController::class, 'index']);
+            Route::get('review_detail/{product}', [ReviewController::class, 'review_detail']);
         });
 
         #upload

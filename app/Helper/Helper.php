@@ -97,5 +97,18 @@ class Helper
         if($price != 0) return number_format($price).'Vnd' ;
         return '<a href="/contacts">Liên Hệ</a>';
     }
+    public static function price1($price = 0, $price_sale = 0)
+    {
+        if($price_sale != 0) return number_format($price_sale).'Vnd';
+        if($price != 0) return number_format($price).'Vnd' ;
+        return '<a href="/contacts">Liên Hệ</a>';
+    }
+    public static function price2($price = 0, $price_sale = 0)
+    {
+        if($price_sale != 0) return $price_sale;
+        if($price != 0) return $price;
+        return '<a href="/contacts">Liên Hệ</a>';
+    }
+
 
 }
