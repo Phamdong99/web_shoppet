@@ -12,7 +12,7 @@ class ProductService
 //    admin
     public function getAll()
     {
-        return Product::where('active','1')->get();
+        return Product::get();
     }
     public function getCate()
     {

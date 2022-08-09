@@ -1,7 +1,7 @@
 @extends('main.main')
 
 @section('content')
-    <form class="bg0 p-t-130 p-b-85" method="post" action="/check-out">
+    <form class="bg0 p-t-130 p-b-85" method="post">
         @include('admin.alert')
         @if (count($products) != 0)
             <div class="container">
@@ -12,17 +12,11 @@
                                 @php $total = 0; @endphp
                                 <table class="table table-bordered table-striped" id="table_product">
                                     <tr class="table_head">
-                                        <th class="column-1">
-                                            <div class="checkbox">
-                                                <label><input id="check_all" type="checkbox" value=""></label>
-                                            </div>
-                                        </th>
                                         <th class="column-2">Ảnh</th>
                                         <th class="column-3">Tên</th>
                                         <th class="column-4">Giá</th>
                                         <th class="column-5">Số Lượng</th>
                                         <th class="column-6">Tổng tiền</th>
-                                        <th class="column-7">Xóa</th>
                                     </tr>
                                     @foreach($products as $key => $product)
                                         @php
@@ -33,11 +27,6 @@
                                         <input type="hidden" name="product_id[]" value="{{$product->id}}">
                                         <tbody>
                                         <tr class="table_row">
-                                            <td class="column-1">
-                                                <div class="checkbox" id="">
-                                                    <label><input type="checkbox" value="{{$product->id}}"></label>
-                                                </div>
-                                            </td>
                                             <td class="column-2">
                                                 <div class="how-itemcart1">
                                                     <img src="{{ $product->file }}" alt="IMG">
@@ -46,27 +35,9 @@
                                             <td class="column-3">{{ $product->name }}</td>
                                             <td class="column-4">{{ number_format($price, 0, '', '.') }} VND</td>
                                             <td class="column-5">
-                                                <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                        <i class="fs-16 zmdi zmdi-minus"></i>
-                                                    </div>
-
-                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                           name="num_product[{{ $product->id }}]"
-                                                           value="{{ $carts[$product->id] }}"
-                                                           data-product-max="{{$product->qty}}">
-
-                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                        <i class="fs-16 zmdi zmdi-plus"></i>
-                                                    </div>
-                                                </div>
+                                                {{ $carts[$product->id] }}
                                             </td>
                                             <td class="column-6">{{ number_format($priceEnd, 0, '', '.') }} VND</td>
-                                            <td class="column-7">
-                                                <a href="/carts/delete/{{ $product->id }}">
-                                                    Xoá
-                                                </a>
-                                            </td>
                                         </tr>
                                         </tbody>
                                     @endforeach
@@ -77,15 +48,11 @@
                                     {{-- <input class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
                                             name="coupon" placeholder="Coupon Code">
  --}}
-                                    <a href="/"
+                                    <a href="/carts"
                                        class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" >
-                                        Tiếp tục mua hàng
+                                        Quay lại giỏ hàng
                                     </a>
                                 </div>
-
-                                <input type="submit" value="Cập nhật giỏ hàng" formaction="/update-cart"
-                                       class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                                @csrf
                             </div>
                         </div>
                     </div>
@@ -93,7 +60,7 @@
                     <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
                         <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
                             <h4 class="mtext-109 cl2 p-b-30">
-                                Tổng giỏ hàng
+                                Tổng đơn hàng
                             </h4>
 
                             <div class="flex-w flex-t p-t-27 p-b-33">
@@ -109,13 +76,47 @@
                                     </span>
                                 </div>
                             </div>
-                            <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" id="check_out">
-                                Thanh Toán
+                            <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+
+                                <div class="size-100 p-r-18 p-r-0-sm w-full-ssm">
+
+                                    <div class="p-t-15">
+                                                                    <span class="stext-112 cl8">
+                                                                        <h5>Thông Tin Khách Hàng</h5>
+                                                                    </span>
+                                        <br>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" value="{{old('name')}}" placeholder="Tên khách Hàng">
+                                        </div>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="phone" value="{{old('phone')}}" placeholder="Số Điện Thoại">
+                                        </div>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" value="{{old('address')}}" placeholder="Địa Chỉ Giao Hàng">
+                                        </div>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="email" value="{{old('email')}}" placeholder="Email Liên Hệ">
+                                        </div>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <textarea class="cl8 plh3 size-111 p-lr-15" name="content" placeholder="Nội dung">{{old('content')}}</textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="redirect" >
+                                Tiếp Tục Thanh Toán
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+            @csrf
     </form>
     @else
         <div class="text-center">

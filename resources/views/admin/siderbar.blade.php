@@ -60,6 +60,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/admin/orders/list" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>
+                            Đơn hàng
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/admin/sizes/list" class="nav-link">
                         <i class="nav-icon fas fa-clone"></i>
                         <p>

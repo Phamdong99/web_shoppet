@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pay_id');
             $table->unsignedBigInteger('member_id');
             $table->integer('active');
+            $table->decimal('total');
             $table->timestamps();
             $table->foreign('cus_id')
                 ->references('id')

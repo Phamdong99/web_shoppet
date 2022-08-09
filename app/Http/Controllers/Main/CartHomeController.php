@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Cart\CreateFormRequest;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -55,11 +54,4 @@ class CartHomeController extends Controller
 
     }
 
-    public function addCart(CreateFormRequest $request)
-    {
-        $this->cartService->addCart($request);
-        return view('main.carts.history_order',[
-            'title'=> 'Lịch sử đặt hàng'
-        ]);
-    }
 }

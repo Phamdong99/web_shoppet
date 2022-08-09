@@ -64,6 +64,20 @@ $("#check_all").change(function (){
 })
 $("#check_out").click(function (){
     $("#table_product input:checked").each(function (){
-        alert($(this).val())
+        var pro_id = ($(this).val())
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            data: { pro_id  : checked },
+            url: '/check-out',
+            success : function (result){
+                console.log(result);
+            },
+            error : function ($error){
+                console.log($error)
+            }
+        })
     })
 })
+

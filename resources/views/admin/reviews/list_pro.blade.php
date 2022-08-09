@@ -10,7 +10,7 @@
                     <th width="5px">ID</th>
                     <th>Ảnh</th>
                     <th>Tên sản phẩm</th>
-                    <th width="100px">Hành động</th>
+                    <th width="150px">Xem các đánh giá</th>
                 </tr>
                 </thead>
                 <tbody>

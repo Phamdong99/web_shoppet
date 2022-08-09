@@ -16,11 +16,12 @@ class ReviewController extends Controller
         $this->reviewService = $reviewService;
     }
 
-    public function index()
+    public function index(Product $product)
     {
         return view('admin.reviews.list_pro', [
            'title'=>'Danh sách sản phẩm được đánh giá',
-            'list_pro_reviews'=>Product::with('reviews')->get()
+            'list_pro_reviews'=>Product::get(),
+            'review_details' => $product->reviews()->get()
         ]);
     }
 

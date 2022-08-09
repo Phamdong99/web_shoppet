@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Cart;
+namespace App\Http\Requests\CheckOut;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,7 +33,7 @@ class CreateFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên sản phẩm !',
+            'name.required' => 'Vui lòng nhập tên người nhận !',
             'phone.required' => 'Vui lòng nhập số điện thoại !',
             'address.required' => 'Vui lòng nhập địa chỉ nhận hàng !',
             'email.required' => 'Vui lòng nhập email !'

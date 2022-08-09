@@ -74,7 +74,7 @@ class CategoryService
     {
         return Category::where('id',$id)->where('active',1)->firstOrFail();
     }
-    public function getProduct($category)
+    public function getProduct($category, $request)
     {
         return $category->product()
             ->where('active',1)

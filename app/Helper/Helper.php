@@ -48,8 +48,8 @@ class Helper
     }
     public static function active($active = 0)
     {
-        return $active == 0 ? '<span class="btn btn-danger btn-xs">Không hoạt động</span>'
-            : '<span class="btn btn-success btn-xs">Hoạt động</span>';
+        return $active == 0 ? '<span class="" style="color: red">Không hoạt động</span>'
+            : '<span class="" style="color: #00A000">Hoạt động</span>';
     }
 //    Load danh mục bên trang chủ khách hàng
     public static function categories($categories, $parent_id = 0)
@@ -64,12 +64,16 @@ class Helper
                         <a href="/danh-muc/'. $category->id .'-'. Str::slug($category->name, '-').'.html">
                             '.$category->name.'
                         </a>';
+
                         if(self::isChild($categories, $category->id))
                         {
                             $html .='<ul class="sub-menu">';
                             $html .= self::categories($categories,$category->id);
                             $html .='</ul>';
                         }
+
+                        unset($categories[$key]);
+
                         $html.='</li>
                 ';
             }
@@ -80,13 +84,13 @@ class Helper
 //    Kiểm tra cấp 2 của danh mục
     public static function isChild($categories, $id)
     {
-        foreach ($categories as $key => $category)
+        foreach ($categories as $category)
         {
             if($category->parent_id == $id ){
                 return true;
             }
-            return false;
         }
+        return false;
     }
 
 //    price
@@ -97,12 +101,12 @@ class Helper
         if($price != 0) return number_format($price).'Vnd' ;
         return '<a href="/contacts">Liên Hệ</a>';
     }
-    public static function price1($price = 0, $price_sale = 0)
-    {
-        if($price_sale != 0) return number_format($price_sale).'Vnd';
-        if($price != 0) return number_format($price).'Vnd' ;
-        return '<a href="/contacts">Liên Hệ</a>';
-    }
+//    public static function price1($price = 0, $price_sale = 0)
+//    {
+//        if($price_sale != 0) return number_format($price_sale).'Vnd';
+//        if($price != 0) return number_format($price).'Vnd' ;
+//        return '<a href="/contacts">Liên Hệ</a>';
+//    }
     public static function price2($price = 0, $price_sale = 0)
     {
         if($price_sale != 0) return $price_sale;

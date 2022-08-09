@@ -76,4 +76,38 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+        $(".active").on('change', function (e) {
+            let active = e.target.value;
+            let cart_id = e.target.getAttribute("data-cart");
+
+            // update active cart
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: { active, cart_id },
+                url: '{{route('admin.order.update')}}',
+                success: function (result)
+                {
+                    if(result.error === false){
+                        alert(result.message);
+                        location.reload();
+                    }
+                    else
+                    {
+                        alert('Cập nhật đơn hàng không thành công. Vui lòng thử lại');
+                    }
+                },
+                error: function ($err)
+                {
+                    console.log($err)
+                }
+            })
+        })
+    })
+</script>
 @yield('footer')

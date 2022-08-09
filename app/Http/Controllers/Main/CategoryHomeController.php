@@ -21,7 +21,7 @@ class CategoryHomeController extends Controller
 //        check danh mục cha
         $category = $this->categoryService->getId($id);
 //        load sp theo danh mục
-        $products = $this->categoryService->getProduct($category);
+        $products = $this->categoryService->getProduct($category, $request);
 
         return view('main.cate_product',[
            'title'=>$category->name,

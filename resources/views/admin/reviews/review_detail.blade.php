@@ -16,7 +16,7 @@
                     <th class="column-1">Tên người đánh giá</th>
                     <th class="column-2">Email</th>
                     <th class="column-3">Nội dung đánh giá</th>
-                    <th class="column-3">Trạng thái</th>
+                    <th class="column-4">Thời gian đánh giá</th>
                 </tr>
 
                 @foreach($review_details as $key => $review_detail)
@@ -25,12 +25,7 @@
                         <td class="column-1">{{ $review_detail->name }}</td>
                         <td class="column-2">{{ $review_detail->email }}</td>
                         <td class="column-3">{{ $review_detail->content }}</td>
-                       {{-- <td>
-                            <select name="active" class="active" data-review="{{$review_detail->id}}">
-                                <option value="0" {{$review_detail->active == 0 ? 'selected' : ''}}>Đang hiển thị</option>
-                                <option value="1" {{$review_detail->active == 1 ? 'selected' : ''}}>Đóng</option>
-                            </select>
-                        </td>--}}
+                        <td class="column-4">{{ $review_detail->created_at }}</td>
                     </tr>
                 @endforeach
                 </tbody>
