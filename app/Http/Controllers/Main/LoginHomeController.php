@@ -30,7 +30,7 @@ class LoginHomeController extends Controller
 
         ],$request->input('remember')))
         {
-            return redirect() -> route('member');
+            return redirect() -> route('main');
         }
         Session::flash('error','Email hoặc Password không đúng');
         return redirect()->back();

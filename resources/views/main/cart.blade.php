@@ -16,21 +16,21 @@
             $total = 0
             @endphp
 
-            @foreach($cart_products as $product_cart)
+            @foreach($products as $product)
                     @php
-                      $price = (\App\Helper\Helper::price2($product_cart->price, $product_cart->price_sale));
+                      $price = (\App\Helper\Helper::price2($product->price, $product->price_sale));
                   /*    $price_pro_cart = $price * $carts[$product_cart->id];
                       $total += $price_pro_cart*/
                     @endphp
             <ul class="header-cart-wrapitem w-full">
                 <li class="header-cart-item flex-w flex-t m-b-12">
                     <div class="header-cart-item-img">
-                        <img src="{{$product_cart->file}}" alt="IMG">
+                        <img src="{{$product->file}}" alt="IMG">
                     </div>
 
                     <div class="header-cart-item-txt p-t-8">
                         <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            {{$product_cart->name}}
+                            {{$product->name}}
                         </a>
 
                         <span class="header-cart-item-info">

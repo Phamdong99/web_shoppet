@@ -111,7 +111,7 @@ Route::middleware(['auth:member'])->group(function () {
 
 });
 
-Route::get('/', [MainHomeController::class, 'index']);
+Route::get('/', [MainHomeController::class, 'index'])->name('main');
 Route::get('/danh-muc/{id}-{slug}.html', [CategoryHomeController::class, 'index']);
 Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'index']);
 Route::post('/services/load-product',[MainHomeController::class, 'loadProduct']);
