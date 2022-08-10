@@ -10,6 +10,8 @@ class Size extends Model
     use HasFactory;
 
     protected $fillable = [
-        'size'
+        'size',
+        'description',
+        'active'
     ];
 }

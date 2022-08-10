@@ -16,6 +16,7 @@ class CartService
     {
         $qty = (int)$request->input('num_product');
         $product_id = (int)$request->input('pro_id');
+        $size = (int)$request->input('size_id');
 
         if ($qty <= 0 || $product_id <= 0) {
             Session::flash('error', 'Số lượng hoặc sản phẩm không chính xác');

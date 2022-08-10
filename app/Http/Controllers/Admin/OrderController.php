@@ -18,11 +18,11 @@ class OrderController extends Controller
         $this->orderServices = $orderServices;
     }
 
-    public function index()
+    public function index(Cart $cart)
     {
         return view('admin.orders.list', [
            'title'=>'Danh sách đơn hàng',
-            'orders' => Customer::with('carts')->get()
+            'orders' => Customer::with('carts')->get(),
         ]);
     }
 
@@ -32,7 +32,8 @@ class OrderController extends Controller
             'title'=>'chi tiết đơn hàng',
             'customer'=>$cart->customers,
             'carts'=>$cart->cartdetails,
-            'total'=>$cart->total
+            'total'=>$cart->total,
+            'payment_method'=>$cart->payment_methods->name
 
         ]);
     }

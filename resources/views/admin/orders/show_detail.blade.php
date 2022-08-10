@@ -40,8 +40,12 @@
                 </tr>
             @endforeach
             <tr>
-                <td colspan="4" class="text-right">Tổng Tiền</td>
+                <td colspan="4" class="text-right">Tổng Tiền : </td>
                 <td>{{ number_format($total, 0, '', '.')  }} VND</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="text-right">Trạng thái : </td>
+                <td>{{ $payment_method }}</td>
             </tr>
             </tbody>
         </table>

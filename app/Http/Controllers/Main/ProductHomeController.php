@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Size;
 use App\Services\ProductService;
 use App\Services\ReviewService;
 use Illuminate\Http\Request;
@@ -22,11 +23,13 @@ class ProductHomeController extends Controller
     {
         $product = $this->productService->show($id);
         $productMore = $this->productService->more($id);
+        $sizes = $this->productService->getSize();
         return view('main.product_detail', [
             'title'=>$product->name,
             'product'=>$product,
             'products'=>$productMore,
-            'reviews' => $product->reviews
+            'reviews' => $product->reviews,
+            'sizes'=>$sizes
         ]);
     }
 

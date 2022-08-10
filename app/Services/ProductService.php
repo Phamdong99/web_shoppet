@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Support\Facades\Session;
 use Termwind\Components\Li;
 
@@ -121,5 +122,10 @@ class ProductService
             ->limit(8)
             ->with('menu')
             ->get();
+    }
+
+    public function getSize()
+    {
+        return Size::where('active',1)->get();
     }
 }

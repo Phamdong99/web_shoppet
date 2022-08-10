@@ -8,6 +8,8 @@
                 <div class="row">
                     <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                         <div class="m-l-25 m-r--38 m-lr-0-xl">
+                            <h2 class="p-l-250">{{ $title }}</h2>
+                            <br>
                             <div class="wrap-table-shopping-cart">
                                 @php $total = 0; @endphp
                                 <table class="table table-bordered table-striped" id="table_product">

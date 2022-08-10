@@ -35,4 +35,10 @@ class LoginHomeController extends Controller
         Session::flash('error','Email hoặc Password không đúng');
         return redirect()->back();
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('member/login');
+    }
 }

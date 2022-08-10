@@ -8,6 +8,8 @@
                 <div class="row">
                     <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                         <div class="m-l-25 m-r--38 m-lr-0-xl">
+                            <h2 class="p-l-230">{{ $title }}</h2>
+                            <br>
                             <div class="wrap-table-shopping-cart">
                                 @php $total = 0; @endphp
                                 <table class="table table-bordered table-striped" id="table_product">
@@ -106,9 +108,16 @@
                                             <textarea class="cl8 plh3 size-111 p-lr-15" name="content" placeholder="Nội dung">{{old('content')}}</textarea>
                                         </div>
 
+                                        <select class="btn btn-secondary" name="pay_id" style="cursor:pointer;">
+                                            <option value="0">--Chọn PTTT--</option>
+                                            @foreach($payment_methods as $payment_method)
+                                                <option value="{{ $payment_method->id }}">{{ $payment_method->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
+
                             <button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="redirect" >
                                 Tiếp Tục Thanh Toán
                             </button>
@@ -124,6 +133,9 @@
             <br>
             <a class="btn btn-secondary" href="/">
                 Quay Lại Trang Chủ
+            </a>
+            <a class="btn btn-secondary" href="/history">
+                Đi đến lịch sử đặt hàng
             </a>
         </div>
     @endif

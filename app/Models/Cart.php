@@ -12,7 +12,8 @@ class Cart extends Model
     protected $fillable = [
       'cus_id',
       'active',
-        'total'
+        'total',
+        'pay_id'
     ];
 
     public function cartdetails()
@@ -24,6 +25,12 @@ class Cart extends Model
     {
         //liên kết 1-n 1 khách hàng có nhiều lựa chọn
         return $this->belongsTo(Customer::class, 'cus_id', 'id');
+    }
+
+    public function payment_methods()
+    {
+
+        return $this->belongsTo(PaymentMethod::class, 'pay_id', 'id');
     }
 
 }

@@ -26,14 +26,14 @@
                 <label for="menu">Ảnh</label>
                 <input type="file" class="form-control"  id="upload" value="{{ $category->file }}">
                 <div id="image_show">
-                    <a href="{{$category->file}}">
+                    <a href="{{$category->file}}" target="_blank">
                         <img src="{{$category->file}}" width="100px">
                     </a>
                 </div>
                 <div id="image_show">
 
                 </div>
-                <input type="hidden" name="file" id="file">
+                <input type="hidden" name="file" id="file" value="{{$category->file}}">
             </div>
 
             <div class="form-group">

@@ -3,18 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Authenticatable
+class PaymentMethod extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'address',
-        'phone'
+      'name',
+      'active'
     ];
 }

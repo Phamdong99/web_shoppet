@@ -27,7 +27,7 @@ class CreateFormRequest extends FormRequest
             'name' => 'required',
             'phone' => 'required',
             'address'=>'required',
-            'email' => 'required'
+            'email' => 'required',
         ];
     }
     public function messages()

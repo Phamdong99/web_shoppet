@@ -69,10 +69,17 @@ $("#check_out").click(function (){
         $.ajax({
             type: 'POST',
             dataType: 'JSON',
-            data: { pro_id  : checked },
+            data: { pro_id  },
             url: '/check-out',
             success : function (result){
-                console.log(result);
+                if(result.error === false){
+                    alert(result.message);
+                    location.reload();
+                }
+                else
+                {
+                    alert('chọn sản phẩm không thành công');
+                }
             },
             error : function ($error){
                 console.log($error)

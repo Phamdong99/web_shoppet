@@ -16,6 +16,7 @@ use App\Http\Controllers\Main\LoginHomeController;
 use App\Http\Controllers\Main\MainHomeController;
 use App\Http\Controllers\Main\CategoryHomeController;
 use App\Http\Controllers\Main\ProductHomeController;
+use App\Http\Controllers\Main\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,14 +103,12 @@ Route::middleware(['auth'])->group(function (){
     });
 });
 
-
+Route::get('member/register',[RegisterController::class, 'register']);
+Route::post('member/register/store',[RegisterController::class, 'create_register']);
 Route::get('member/login',[LoginHomeController::class, 'index'])->name('member_login');
 Route::post('member/login/store',[LoginHomeController::class, 'store']);
 Route::get('member/logout',[LoginHomeController::class, 'logout']);
 
-Route::middleware(['auth:member'])->group(function () {
-
-});
 
 Route::get('/', [MainHomeController::class, 'index'])->name('main');
 Route::get('/danh-muc/{id}-{slug}.html', [CategoryHomeController::class, 'index']);
@@ -121,10 +120,18 @@ Route::post('add-cart', [CartHomeController::class, 'index']);
 Route::get('carts', [CartHomeController::class, 'show']);
 Route::post('update-cart', [CartHomeController::class, 'update']);
 Route::get('carts/delete/{id}', [CartHomeController::class, 'remove']);
-Route::post('check-out', [CheckOutController::class, 'index']);
-
+Route::post('check-out', [CheckOutController::class, 'index'])->name('check_out');
 Route::get('checkout', [CheckOutController::class, 'checkout']);
 Route::post('checkout', [CheckOutController::class, 'addCart']);
+Route::get('history', [CheckOutController::class, 'history_order'])->name('history');
+Route::post('history', [CheckOutController::class, 'history_order_store']);
 
 Route::get('contacts',[ContactController::class, 'show_contact']);
 Route::get('search', [MainHomeController::class, 'search'])->name('member.search');
+
+Route::middleware(['auth:member'])->group(function () {
+
+});
+
+
+

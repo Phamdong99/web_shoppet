@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Http\Requests\Cart\CreateFormRequest;
+use App\Jobs\SendMail;
 use App\Models\Cart;
 use App\Models\Customer;
+use App\Models\PaymentMethod;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -21,7 +23,7 @@ class CheckoutService
 
     public function checkout()
     {
-       $carts = Session::get('carts');
+        $carts = Session::get('carts');
         if (is_null($carts)) return [];
 //        Lấy id sản phẩm  từ cart
         $productId = array_keys($carts);
@@ -32,9 +34,15 @@ class CheckoutService
 
     }
 
+    public function getPay()
+    {
+        return PaymentMethod::where('active', 1)->get();
+    }
+
     //Lưu cart vào db
     public function addCart($request)
     {
+        $pay_id = (int)$request->input('pay_id');
         try {
             DB::beginTransaction(); //khi chạy try mà gặp lỗi thì commit để tránh bị dư dữ liệu
             $carts = Session::get('carts');
@@ -52,26 +60,30 @@ class CheckoutService
             ]);
 
 //            Insert vào db cart
-            $insert_cart = $this->infoProductCart($carts, $customer->id);
+            $insert_cart = $this->infoProductCart($carts, $customer->id, $pay_id);
             DB::commit();
+
             Session::get('success', 'Bạn đã đặt hàng thành công');
+
+            //queue
+            SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
 
             Session::flush();
             return $insert_cart;
 
         }catch (\Exception $err){
-            throw $err;
             DB::rollBack();
             Session::get('error', $err->getMessage());
         }
         return false;
     }
-    public function infoProductCart($carts, $customer_id)
+    public function infoProductCart($carts, $customer_id, $pay_id)
     {
         $cart = Cart::create([
             'cus_id'=>$customer_id,
             'active' => 1,
-            'total'=> 0
+            'total'=> 0,
+            'pay_id'=>$pay_id
         ]);
 
         $total = 0;

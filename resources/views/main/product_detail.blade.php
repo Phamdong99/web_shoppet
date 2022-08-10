@@ -179,12 +179,11 @@
 
                                                <div class="size-204 respon6-next">
                                                    <div class="rs1-select2 bor8 bg0">
-                                                       <select class="js-select2" name="time">
-                                                           <option>Chọn size</option>
-                                                           <option>Size S</option>
-                                                           <option>Size M</option>
-                                                           <option>Size L</option>
-                                                           <option>Size XL</option>
+                                                       <select class="js-select2" name="size_id" style="cursor:pointer;">
+                                                           <option value="0">--Chọn size--</option>
+                                                           @foreach($sizes as $key => $size)
+                                                           <option value="{{ $size->id }}" >{{ $size->size }}</option>
+                                                           @endforeach
                                                        </select>
                                                        <div class="dropDownSelect2"></div>
                                                    </div>
@@ -248,7 +247,7 @@
                        <!-- Nav tabs -->
                        <ul class="nav nav-tabs" role="tablist">
                            <li class="nav-item p-b-10">
-                               <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a>
+                               <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Mô Tả</a>
                            </li>
 
                            <li class="nav-item p-b-10">
@@ -263,7 +262,7 @@
                                @endphp
                            @endforeach
                            <li class="nav-item p-b-10">
-                               <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews ({{ $count_review }})</a>
+                               <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Đánh giá ({{ $count_review }})</a>
                            </li>
                        </ul>
 
