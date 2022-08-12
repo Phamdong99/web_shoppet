@@ -41,6 +41,7 @@ class MainHomeController extends Controller
         $result = $this->productService->get($page);
 
         if (count($result) != 0) {
+            //chuyền vào view 1 cái biến product và biến này sẽ chứa data và sau đó render ra view
             $html = view('main.product', ['product' => $result])->render();
 
             return response()->json([

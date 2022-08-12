@@ -1,5 +1,6 @@
 @extends('main.main')
 
+
 @section('content')
     <form class="bg0 p-t-130 p-b-85" method="post">
         @include('admin.alert')
@@ -39,6 +40,7 @@
                                             <td class="column-5">
                                                 {{ $carts[$product->id] }}
                                             </td>
+                                            <input type="hidden" name="qty_pro" id="qty_pro" value="{{ $carts[$product->id] }}">
                                             <td class="column-6">{{ number_format($priceEnd, 0, '', '.') }} VND</td>
                                         </tr>
                                         </tbody>

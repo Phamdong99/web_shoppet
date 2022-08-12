@@ -14,7 +14,9 @@ function loadMore()
         url: '/services/load-product',
         success : function (result){
             if(result.html !== ''){
+                //append result vào chỗ sản phẩm
                 $('#loadProduct').append(result.html);
+                //tăng page lên
                 $('#page').val(page +1);
             }
             else {
@@ -36,7 +38,10 @@ $(document).ready(function () {
             $(this).val(max);
         }
     })
-
+    //parent() lấy ra phần tử đứng trc của phần tử hiện tại
+    //parseInt() chuyển đổi kiểu string về int
+    //find(): Giúp tìm thành phần trong thành phần cha.
+    // attr() : ta đã lấy được giá trị thuộc tính href của thẻ a.
     $(".btn-num-product-up").on('click', function (e){
         var max = $(this).parent().find("input").attr('data-product-max');
         var input_product = $(this).parent().find("input").val();
@@ -46,8 +51,6 @@ $(document).ready(function () {
         }
     })
 })
-
-
 
 //thanh toán
 $("#check_all").change(function (){
@@ -63,28 +66,29 @@ $("#check_all").change(function (){
     }
 })
 $("#check_out").click(function (){
-    $("#table_product input:checked").each(function (){
-        var pro_id = ($(this).val())
+    let id_product = [];
+    $("#table_product >tbody input:checked").each(function (){
+        id_product.push($(this).val());
+    })
 
-        $.ajax({
-            type: 'POST',
-            dataType: 'JSON',
-            data: { pro_id  },
-            url: '/check-out',
-            success : function (result){
-                if(result.error === false){
-                    alert(result.message);
-                    location.reload();
-                }
-                else
-                {
-                    alert('chọn sản phẩm không thành công');
-                }
-            },
-            error : function ($error){
-                console.log($error)
+    $.ajax({
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            id_product: id_product
+        },
+        url: '/check-out',
+        success : function (result){
+            if(result){
+                window.location.href = "/checkout";
+            }else {
+                alert('Sai');
             }
-        })
+
+        },
+        error: function() {
+            //
+        }
     })
 })
 

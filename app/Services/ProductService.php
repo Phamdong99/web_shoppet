@@ -13,7 +13,7 @@ class ProductService
 //    admin
     public function getAll()
     {
-        return Product::get();
+        return Product::latest()->get();
     }
     public function getCate()
     {

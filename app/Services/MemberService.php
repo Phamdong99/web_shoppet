@@ -13,7 +13,7 @@ class MemberService
     {
         try{
             Member::create([
-                'name' => (string) $request->input('name'),
+                'name' => (string) $request->input('namgit puse'),
                 'email' => (string) $request->input('email'),
                 'password' => Hash::make((string) $request->input('password')),
                 'address' => (string) $request->input('address'),

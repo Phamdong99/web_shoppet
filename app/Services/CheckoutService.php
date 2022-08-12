@@ -13,26 +13,6 @@ use Illuminate\Support\Facades\Session;
 
 class CheckoutService
 {
-    public function create($request)
-    {
-        if($request->input() != null){
-            return true;
-        }
-        return false;
-    }
-
-    public function checkout()
-    {
-        $carts = Session::get('carts');
-        if (is_null($carts)) return [];
-//        Lấy id sản phẩm  từ cart
-        $productId = array_keys($carts);
-
-        return Product::where('active', 1)
-            ->whereIn('id', $productId)
-            ->get();
-
-    }
 
     public function getPay()
     {
@@ -44,12 +24,11 @@ class CheckoutService
     {
         $pay_id = (int)$request->input('pay_id');
         try {
-            DB::beginTransaction(); //khi chạy try mà gặp lỗi thì commit để tránh bị dư dữ liệu
+            DB::beginTransaction();//khi chạy try mà gặp lỗi thì commit để tránh bị dư dữ liệu
             $carts = Session::get('carts');
             if(is_null($carts)) return false;
 
 //           Insert vào db customer
-
             $customer = Customer::create([
                 'name' => $request->input('name'),
                 'phone' => $request->input('phone'),
@@ -59,7 +38,7 @@ class CheckoutService
                 'active' => $request->input(1)
             ]);
 
-//            Insert vào db cart
+//          Insert vào db cart
             $insert_cart = $this->infoProductCart($carts, $customer->id, $pay_id);
             DB::commit();
 

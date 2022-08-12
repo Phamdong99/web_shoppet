@@ -55,16 +55,6 @@
                 <input type="hidden" name="file" id="file">
             </div>
 
-           {{-- <div class="form-group">
-                <label for="type">Loại</label>
-                <select class="form-control" name="type" required>
-                    <option value=""> Loại </option>
-                    <option value="0"> Thú Cưng </option>
-                    <option value="1"> Phụ Kiện </option>
-                    <option value="2"> Dịch Vụ </option>
-                </select>
-            </div>--}}
-
             <!-- /.card-body -->
             <div class="form-group">
                 <label>Kích Hoạt</label>

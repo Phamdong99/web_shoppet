@@ -11,7 +11,7 @@ class LoginHomeController extends Controller
 {
     public function index()
     {
-        return view('main.login', [
+        return view('main.information.login', [
             'title'=>'Đăng nhập thành viên'
         ]);
     }
@@ -24,7 +24,6 @@ class LoginHomeController extends Controller
         ]);
 
         if(Auth::guard('member')->attempt([
-
             'email'=>$request->input('email'),
             'password'=>$request->input('password')
 
@@ -36,9 +35,16 @@ class LoginHomeController extends Controller
         return redirect()->back();
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
         return redirect('member/login');
+    }
+
+    public function information()
+    {
+        return view('main.information.information', [
+            'title'=>'Thông tin tài khoản'
+        ]);
     }
 }

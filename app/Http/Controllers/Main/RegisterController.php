@@ -16,7 +16,7 @@ class RegisterController extends Controller
 
     public function register()
     {
-        return view('main.register', [
+        return view('main.information.register', [
             'title'=>'Đăng ký tài khoản'
         ]);
     }

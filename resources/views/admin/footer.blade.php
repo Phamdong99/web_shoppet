@@ -78,6 +78,8 @@
 </script>
 
 <script>
+    //getAttribute() : trả về phần tử được chỉ định
+    //target lựa chọn phần tử được chỉ định
     $(document).ready(function () {
         $(".active").on('change', function (e) {
             let active = e.target.value;

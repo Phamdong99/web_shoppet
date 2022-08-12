@@ -10,8 +10,8 @@
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        Trợ giúp
+                    <a href="/member/information" class="flex-c-m trans-04 p-lr-25">
+                        Tài khoản
                     </a>
 
                     <a href="/member/login" class="flex-c-m trans-04 p-lr-25">

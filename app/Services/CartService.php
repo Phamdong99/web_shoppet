@@ -34,7 +34,7 @@ class CartService
         //ngược lại ta cập nhật số lượng cũ
         //arr:exists de lay ra cai id xem nó có tồn tại trong giỏ hàng k
         $exists = Arr::exists($carts, $product_id);
-     //        Kiểm tra xem đã có sản phẩm đấy trong giỏ hàng chưa
+     // Kiểm tra xem đã có sản phẩm đấy trong giỏ hàng chưa
         if ($exists) {
             $carts[$product_id] = $carts[$product_id] + $qty;
             //update session

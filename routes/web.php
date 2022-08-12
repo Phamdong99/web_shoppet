@@ -107,6 +107,8 @@ Route::get('member/register',[RegisterController::class, 'register']);
 Route::post('member/register/store',[RegisterController::class, 'create_register']);
 Route::get('member/login',[LoginHomeController::class, 'index'])->name('member_login');
 Route::post('member/login/store',[LoginHomeController::class, 'store']);
+Route::get('member/information',[LoginHomeController::class, 'information']);
+Route::post('member/information/store',[LoginHomeController::class, 'information_store']);
 Route::get('member/logout',[LoginHomeController::class, 'logout']);
 
 
@@ -120,7 +122,9 @@ Route::post('add-cart', [CartHomeController::class, 'index']);
 Route::get('carts', [CartHomeController::class, 'show']);
 Route::post('update-cart', [CartHomeController::class, 'update']);
 Route::get('carts/delete/{id}', [CartHomeController::class, 'remove']);
-Route::post('check-out', [CheckOutController::class, 'index'])->name('check_out');
+Route::post('add-cart/cart', [CartHomeController::class, 'index_cart']);
+Route::get('carts/cart', [CartHomeController::class, 'show_cart']);
+Route::post('check-out', [CheckOutController::class, 'index']);
 Route::get('checkout', [CheckOutController::class, 'checkout']);
 Route::post('checkout', [CheckOutController::class, 'addCart']);
 Route::get('history', [CheckOutController::class, 'history_order'])->name('history');

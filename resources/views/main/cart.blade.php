@@ -12,11 +12,14 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--        <div class="header-cart-content flex-w js-pscroll">--}}
-{{--            @foreach($cart_products as $product)--}}
+{{--            @php--}}
+{{--            $total = 0;--}}
+{{--            @endphp--}}
+{{--            @foreach($products as $product)--}}
 {{--                    @php--}}
 {{--                      $price = (\App\Helper\Helper::price2($product->price, $product->price_sale));--}}
-{{--                  /*    $price_pro_cart = $price * $carts[$product_cart->id];--}}
-{{--                      $total += $price_pro_cart*/--}}
+{{--                      $price_pro_cart = $price * $carts[$product->id];--}}
+{{--                      $total += $price_pro_cart--}}
 {{--                    @endphp--}}
 {{--            <ul class="header-cart-wrapitem w-full">--}}
 {{--                <li class="header-cart-item flex-w flex-t m-b-12">--}}
@@ -30,7 +33,7 @@
 {{--                        </a>--}}
 
 {{--                        <span class="header-cart-item-info">--}}
-{{--								{{ $carts[$product_cart->id] }} x {!! number_format($price).' Vnd' !!}--}}
+{{--								{{ $carts[$product->id] }} x {!! number_format($price).' Vnd' !!}--}}
 {{--							</span>--}}
 {{--                    </div>--}}
 {{--                </li>--}}
@@ -38,7 +41,7 @@
 {{--            @endforeach--}}
 {{--            <div class="w-full">--}}
 {{--                <div class="header-cart-total w-full p-tb-40">--}}
-{{--                    Tổng giỏ hàng:--}}
+{{--                    Tổng giỏ hàng : {{ number_format($total). ' Vnd' }}--}}
 {{--                </div>--}}
 
 {{--                <div class="header-cart-buttons flex-w w-full">--}}
