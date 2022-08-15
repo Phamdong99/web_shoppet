@@ -27,7 +27,7 @@
                                             $priceEnd = $price * $carts[$product->id];
                                             $total += $priceEnd;
                                         @endphp
-                                        <input type="hidden" name="product_id[]" value="{{$product->id}}">
+                                        <input type="hidden" name="cart_item[{{$product->id}}]" value="{{ $carts[$product->id] }}">
                                         <tbody>
                                         <tr class="table_row">
                                             <td class="column-2">
@@ -40,7 +40,6 @@
                                             <td class="column-5">
                                                 {{ $carts[$product->id] }}
                                             </td>
-                                            <input type="hidden" name="qty_pro" id="qty_pro" value="{{ $carts[$product->id] }}">
                                             <td class="column-6">{{ number_format($priceEnd, 0, '', '.') }} VND</td>
                                         </tr>
                                         </tbody>

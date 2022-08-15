@@ -8,6 +8,7 @@ use App\Services\CategoryService;
 use App\Services\ProductService;
 use App\Services\SliderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainHomeController extends Controller
 {
@@ -26,6 +27,7 @@ class MainHomeController extends Controller
 
     public function index()
     {
+//        dd(Auth::guard('member')->user()->id);
        return view('main.home', [
            'title'=>'Trang chủ',
            'sliders'=>$this->sliderService->show(),

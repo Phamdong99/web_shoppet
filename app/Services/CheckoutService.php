@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Cart\CreateFormRequest;
 use App\Jobs\SendMail;
 use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\PaymentMethod;
 use App\Models\Product;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -18,6 +18,15 @@ class CheckoutService
     {
         return PaymentMethod::where('active', 1)->get();
     }
+    public function create($request)
+    {
+        $qty_pro = $request->input('qty_pro');
+        $product_id = $request->input('product_id');
+
+            Session::put('orders', [
+                $product_id => $qty_pro
+            ]);
+    }
 
     //Lưu cart vào db
     public function addCart($request)
@@ -25,7 +34,7 @@ class CheckoutService
         $pay_id = (int)$request->input('pay_id');
         try {
             DB::beginTransaction();//khi chạy try mà gặp lỗi thì commit để tránh bị dư dữ liệu
-            $carts = Session::get('carts');
+            $carts = $request->input('cart_item');
             if(is_null($carts)) return false;
 
 //           Insert vào db customer
@@ -58,6 +67,7 @@ class CheckoutService
     }
     public function infoProductCart($carts, $customer_id, $pay_id)
     {
+
         $cart = Cart::create([
             'cus_id'=>$customer_id,
             'active' => 1,
@@ -68,6 +78,7 @@ class CheckoutService
         $total = 0;
 
 //        Insert vào cart detail
+
         foreach ($carts as $key => $item){
             $product = $this->getDetailProduct($key);
             $price = $product->price_sale != 0 ? $product->price_sale : $product->price;

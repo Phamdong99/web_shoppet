@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
+use phpDocumentor\Reflection\Types\True_;
 
 class CheckOutController extends Controller
 {
@@ -22,10 +23,16 @@ class CheckOutController extends Controller
 
     public function index(Request $request)
     {
-       $id_product = $request['id_product'];
 
-        Session::put('id_product', $id_product);
-        return response()->json($id_product,200);
+//        $this->checkoutService->create($request);
+            $id_product = $request->id_product;
+            Session::put('id_product', $id_product);
+            return response()->json($id_product,200);
+
+//       $id_product = $request['id_product'];
+//
+//       Session::put('id_product', $id_product);
+//       return response()->json($id_product,200);
 
     }
 
@@ -33,13 +40,16 @@ class CheckOutController extends Controller
     {
         $payment_method = $this->checkoutService->getPay();
         $id_product = Session::get('id_product');
-        $productCheck = Product::whereIn('id', [$id_product])->get();
-        $carts = Session::get('carts');
+//        dd(array_values($id_product));
+        $productCheck = [];
+        if($id_product){
+            $productCheck = Product::whereIn('id', $id_product)->get();
+        }
 
         return view('main.check_out', [
             'title' => 'Trang thanh toán',
             'products' => $productCheck,
-            'carts'=> $carts,
+            'carts'=> Session::get('carts'),
             'payment_methods'=> $payment_method
         ]);
 
