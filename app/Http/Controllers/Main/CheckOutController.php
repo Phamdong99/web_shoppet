@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckOut\CreateFormRequest;
+use App\Models\Cart;
+use App\Models\Member;
 use App\Models\PaymentMethod;
 use App\Services\CheckoutService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
 use phpDocumentor\Reflection\Types\True_;
@@ -23,24 +26,16 @@ class CheckOutController extends Controller
 
     public function index(Request $request)
     {
-
-//        $this->checkoutService->create($request);
-            $id_product = $request->id_product;
-            Session::put('id_product', $id_product);
-            return response()->json($id_product,200);
-
-//       $id_product = $request['id_product'];
-//
-//       Session::put('id_product', $id_product);
-//       return response()->json($id_product,200);
-
+        $id_product = $request->id_product;
+        Session::put('id_product', $id_product);
+        return response()->json($id_product,200);
     }
 
     public function checkout()
     {
         $payment_method = $this->checkoutService->getPay();
         $id_product = Session::get('id_product');
-//        dd(array_values($id_product));
+
         $productCheck = [];
         if($id_product){
             $productCheck = Product::whereIn('id', $id_product)->get();
@@ -61,7 +56,7 @@ class CheckOutController extends Controller
 
         $result = $this->checkoutService->addCart($request);
         if($result){
-            if($pay_id == 1){
+            if($pay_id == 2){
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                 $vnp_Returnurl = "http://127.0.0.1:8000/history";
                 $vnp_TmnCode = "L8JU9RJK";//Mã website tại VNPAY
@@ -131,16 +126,10 @@ class CheckOutController extends Controller
                 }
                 // vui lòng tham khảo thêm tại code demo
             }
-            return redirect()->back();
+            return redirect()->route('history');
+
         }
         return redirect()->back();
-    }
-
-    public function history_order()
-    {
-       return view('main.carts.history_order', [
-           'title'=>'Lịch sử đơn hàng'
-       ]);
     }
 
 }

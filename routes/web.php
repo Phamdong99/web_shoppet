@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Main\CartHomeController;
 use App\Http\Controllers\Main\CheckOutController;
+use App\Http\Controllers\Main\HistoryOrderController;
 use App\Http\Controllers\Main\LoginHomeController;
 use App\Http\Controllers\Main\MainHomeController;
 use App\Http\Controllers\Main\CategoryHomeController;
@@ -107,8 +108,7 @@ Route::get('member/register',[RegisterController::class, 'register']);
 Route::post('member/register/store',[RegisterController::class, 'create_register']);
 Route::get('member/login',[LoginHomeController::class, 'index'])->name('member_login');
 Route::post('member/login/store',[LoginHomeController::class, 'store']);
-Route::get('member/information',[LoginHomeController::class, 'information']);
-Route::post('member/information/store',[LoginHomeController::class, 'information_store']);
+
 Route::get('member/logout',[LoginHomeController::class, 'logout']);
 
 
@@ -118,23 +118,25 @@ Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'index'])
 Route::post('/services/load-product',[MainHomeController::class, 'loadProduct']);
 Route::post('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'add_review']);
 
-Route::post('add-cart', [CartHomeController::class, 'index']);
-Route::get('carts', [CartHomeController::class, 'show']);
-Route::post('update-cart', [CartHomeController::class, 'update']);
-Route::get('carts/delete/{id}', [CartHomeController::class, 'remove']);
-Route::post('add-cart/cart', [CartHomeController::class, 'index_cart']);
-Route::get('carts/cart', [CartHomeController::class, 'show_cart']);
-Route::post('check-out', [CheckOutController::class, 'index']);
-Route::get('checkout', [CheckOutController::class, 'checkout']);
-Route::post('checkout', [CheckOutController::class, 'addCart']);
-Route::get('history', [CheckOutController::class, 'history_order'])->name('history');
-Route::post('history', [CheckOutController::class, 'history_order_store']);
+
 
 Route::get('contacts',[ContactController::class, 'show_contact']);
 Route::get('search', [MainHomeController::class, 'search'])->name('member.search');
 
 Route::middleware(['auth:member'])->group(function () {
-
+    Route::get('member/information',[LoginHomeController::class, 'information']);
+    Route::post('add-cart', [CartHomeController::class, 'index']);
+    Route::get('carts', [CartHomeController::class, 'show']);
+    Route::post('update-cart', [CartHomeController::class, 'update']);
+    Route::get('carts/delete/{id}', [CartHomeController::class, 'remove']);
+    Route::post('add-cart/cart', [CartHomeController::class, 'index_cart']);
+    Route::get('carts/cart', [CartHomeController::class, 'show_cart']);
+    Route::post('check-out', [CheckOutController::class, 'index']);
+    Route::get('checkout', [CheckOutController::class, 'checkout']);
+    Route::post('checkout', [CheckOutController::class, 'addCart']);
+    Route::get('history', [HistoryOrderController::class, 'history_order'])->name('history');
+    Route::get('orders/show_detail/{cart}', [HistoryOrderController::class, 'show_detail_order']);
+    Route::post('history/update_active', [HistoryOrderController::class, 'update_active']);
 });
 
 

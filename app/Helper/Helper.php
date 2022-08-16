@@ -51,6 +51,17 @@ class Helper
         return $active == 0 ? '<span class="" style="color: red">Không hoạt động</span>'
             : '<span class="" style="color: #00A000">Hoạt động</span>';
     }
+
+    public static function active1($active = 1)
+    {
+        if($active == 1) return "Chờ xác nhận";
+        if($active == 2) return "Chờ lấy hàng";
+        if($active == 3) return "Đang giao";
+        if($active == 4) return "Đơn hàng thành công";
+        if($active == 5) return "Đã hủy";
+        if($active == 6) return "Đơn hàng hoàn trả";
+    }
+
 //    Load danh mục bên trang chủ khách hàng
     public static function categories($categories, $parent_id = 0)
     {

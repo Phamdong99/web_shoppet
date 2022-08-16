@@ -22,7 +22,7 @@ class OrderController extends Controller
     {
         return view('admin.orders.list', [
            'title'=>'Danh sách đơn hàng',
-            'orders' => Customer::with('carts')->get(),
+            'orders' => Customer::with('carts')->latest()->get(),
         ]);
     }
 

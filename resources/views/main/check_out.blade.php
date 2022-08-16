@@ -28,6 +28,7 @@
                                             $total += $priceEnd;
                                         @endphp
                                         <input type="hidden" name="cart_item[{{$product->id}}]" value="{{ $carts[$product->id] }}">
+                                        <input type="hidden" name="member_id" value="{{  Auth::guard('member')->user()->id }}">
                                         <tbody>
                                         <tr class="table_row">
                                             <td class="column-2">
@@ -110,7 +111,6 @@
                                         </div>
 
                                         <select class="btn btn-secondary" name="pay_id" style="cursor:pointer;">
-                                            <option value="0">--Chọn PTTT--</option>
                                             @foreach($payment_methods as $payment_method)
                                                 <option value="{{ $payment_method->id }}">{{ $payment_method->name }}</option>
                                             @endforeach

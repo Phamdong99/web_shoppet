@@ -33,10 +33,10 @@
                         <select name="active" class="active btn btn-secondary" id="active" data-cart="{{ $order->carts[0]->id }}" style="cursor:pointer;">
                             <option value="1" {{ $order->carts[0]->active == 1 ? 'selected' : ''}}>Chưa xác nhận</option>
                             <option value="2" {{ $order->carts[0]->active == 2 ? 'selected' : ''}}>Xác nhận chờ lấy hàng</option>
-                            <option value="4" {{ $order->carts[0]->active == 3 ? 'selected' : ''}}>Đang giao</option>
-                            <option value="5" {{ $order->carts[0]->active == 4 ? 'selected' : ''}}>Giao hàng thành công</option>
-                            <option value="6" {{ $order->carts[0]->active == 5 ? 'selected' : ''}}>Đơn hàng đã huỷ</option>
-                            <option value="7" {{ $order->carts[0]->active == 6 ? 'selected' : ''}}>Đơn hàng hoàn trả</option>
+                            <option value="3" {{ $order->carts[0]->active == 3 ? 'selected' : ''}}>Đang giao</option>
+                            <option value="4" {{ $order->carts[0]->active == 4 ? 'selected' : ''}}>Giao hàng thành công</option>
+                            <option value="5" {{ $order->carts[0]->active == 5 ? 'selected' : ''}}>Đơn hàng đã huỷ</option>
+                            <option value="6" {{ $order->carts[0]->active == 6 ? 'selected' : ''}}>Đơn hàng hoàn trả</option>
                         </select>
                     </td>
                     <td>

@@ -27,7 +27,7 @@ class MainHomeController extends Controller
 
     public function index()
     {
-//        dd(Auth::guard('member')->user()->id);
+
        return view('main.home', [
            'title'=>'Trang chủ',
            'sliders'=>$this->sliderService->show(),

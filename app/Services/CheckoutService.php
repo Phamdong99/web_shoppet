@@ -18,19 +18,11 @@ class CheckoutService
     {
         return PaymentMethod::where('active', 1)->get();
     }
-    public function create($request)
-    {
-        $qty_pro = $request->input('qty_pro');
-        $product_id = $request->input('product_id');
-
-            Session::put('orders', [
-                $product_id => $qty_pro
-            ]);
-    }
 
     //Lưu cart vào db
     public function addCart($request)
     {
+        $member_id = (int)$request->input('member_id');
         $pay_id = (int)$request->input('pay_id');
         try {
             DB::beginTransaction();//khi chạy try mà gặp lỗi thì commit để tránh bị dư dữ liệu
@@ -48,31 +40,33 @@ class CheckoutService
             ]);
 
 //          Insert vào db cart
-            $insert_cart = $this->infoProductCart($carts, $customer->id, $pay_id);
+            $insert_cart = $this->infoProductCart($carts, $customer->id, $pay_id, $member_id);
             DB::commit();
 
-            Session::get('success', 'Bạn đã đặt hàng thành công');
+            Session::flash('success', 'Bạn đã đặt hàng thành công');
 
             //queue
             SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
 
-            Session::flush();
+            //Session::flush();
+
             return $insert_cart;
 
         }catch (\Exception $err){
             DB::rollBack();
-            Session::get('error', $err->getMessage());
+            Session::flash('error', $err->getMessage());
         }
         return false;
     }
-    public function infoProductCart($carts, $customer_id, $pay_id)
+    public function infoProductCart($carts, $customer_id, $pay_id, $member_id)
     {
 
         $cart = Cart::create([
             'cus_id'=>$customer_id,
             'active' => 1,
             'total'=> 0,
-            'pay_id'=>$pay_id
+            'pay_id'=>$pay_id,
+            'member_id'=>$member_id
         ]);
 
         $total = 0;

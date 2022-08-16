@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -37,14 +38,19 @@ class LoginHomeController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+//        Auth::logout();
+        (Auth::guard('member'))->logout();
         return redirect('member/login');
     }
 
     public function information()
     {
+        $id_member = Auth::guard('member')->user()->id;
+        $member = Member::where('id', $id_member)->get();
         return view('main.information.information', [
-            'title'=>'Thông tin tài khoản'
+            'title'=>'Thông tin tài khoản',
+            'members'=>$member
+
         ]);
     }
 }

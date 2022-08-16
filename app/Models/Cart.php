@@ -13,7 +13,8 @@ class Cart extends Model
       'cus_id',
       'active',
         'total',
-        'pay_id'
+        'pay_id',
+        'member_id'
     ];
 
     public function cartdetails()

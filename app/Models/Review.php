@@ -15,4 +15,8 @@ class Review extends Model
         'email',
         'active'
     ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'pro_id', 'id');
+    }
 }

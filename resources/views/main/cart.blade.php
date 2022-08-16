@@ -15,6 +15,7 @@
 {{--            @php--}}
 {{--            $total = 0;--}}
 {{--            @endphp--}}
+{{--            @if(isset($products) && count($products) > 0)--}}
 {{--            @foreach($products as $product)--}}
 {{--                    @php--}}
 {{--                      $price = (\App\Helper\Helper::price2($product->price, $product->price_sale));--}}
@@ -39,6 +40,10 @@
 {{--                </li>--}}
 {{--            </ul>--}}
 {{--            @endforeach--}}
+{{--            @else--}}
+{{--                <h4>Giỏ hàng đang trống</h4>--}}
+{{--            @endif--}}
+
 {{--            <div class="w-full">--}}
 {{--                <div class="header-cart-total w-full p-tb-40">--}}
 {{--                    Tổng giỏ hàng : {{ number_format($total). ' Vnd' }}--}}
