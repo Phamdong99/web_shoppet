@@ -8,9 +8,9 @@ use MongoDB\Driver\Session;
 
 class HistoryOrderService
 {
-    public function updateActive()
+    public function updateActive($cart, $request)
     {
-        $id = \Illuminate\Support\Facades\Session::get('id');
+        $id = (int)$request->input('id');
         if($id)
         {
             return Cart::where('id', $id)->update([
@@ -18,5 +18,6 @@ class HistoryOrderService
             ]);
         }
         return false;
+
     }
 }

@@ -42,9 +42,9 @@ class HistoryOrderController extends Controller
        ]);
     }
 
-    public function update_active()
+    public function update_active(Cart $cart, Request $request)
     {
-        $result = $this->history->updateActive();
+        $result = $this->history->updateActive($cart, $request);
 
         if($result){
             return \response()->json([

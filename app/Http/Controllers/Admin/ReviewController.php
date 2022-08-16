@@ -30,7 +30,7 @@ class ReviewController extends Controller
         return view('admin.reviews.review_detail', [
             'title'=>'Chi tiết đánh giá : '.$product->name,
             'product'=>$product,
-            'review_details' => $product->reviews()->get()
+            'review_details' => $product->reviews()->latest()->get()
         ]);
     }
 }

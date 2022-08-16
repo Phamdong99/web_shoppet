@@ -13,7 +13,7 @@ class MemberService
     {
         try{
             Member::create([
-                'name' => (string) $request->input('namgit puse'),
+                'name' => (string) $request->input('name'),
                 'email' => (string) $request->input('email'),
                 'password' => Hash::make((string) $request->input('password')),
                 'address' => (string) $request->input('address'),
@@ -30,5 +30,18 @@ class MemberService
         }
 
         return true;
+    }
+    public function getMembers()
+    {
+        return Member::latest()->get();
+    }
+
+    public function destroy($request)
+    {
+        $id = (int)$request->input('id');
+        $member = Member::find($id);
+        if($member){
+            return Member::where('id', $id)->delete();
+        }
     }
 }

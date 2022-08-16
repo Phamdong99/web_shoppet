@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
@@ -82,6 +83,12 @@ Route::middleware(['auth'])->group(function (){
                 Route::get('edit/{contact}', [ContactController::class, 'show']);
                 Route::post('edit/{contact}', [ContactController::class, 'update']);
                 Route::DELETE('destroy', [ContactController::class, 'destroy']);
+            });
+
+            #member
+            Route::prefix('members')->group(function () {
+                Route::get('list', [MemberController::class, 'index']);
+                Route::DELETE('destroy', [MemberController::class, 'destroy']);
             });
 
             #size

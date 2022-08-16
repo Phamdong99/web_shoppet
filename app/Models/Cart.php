@@ -28,6 +28,12 @@ class Cart extends Model
         return $this->belongsTo(Customer::class, 'cus_id', 'id');
     }
 
+    public function members()
+    {
+        //liên kết 1-n 1 khách hàng có nhiều lựa chọn
+        return $this->belongsTo(Customer::class, 'member_id', 'id');
+    }
+
     public function payment_methods()
     {
 

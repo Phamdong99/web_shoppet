@@ -20,7 +20,6 @@
                 </tr>
                 </thead>
                 <tbody>
-
                @foreach($orders as $key => $order)
                 <tr>
                     <td>{{ $order->carts[0]->id }}</td>

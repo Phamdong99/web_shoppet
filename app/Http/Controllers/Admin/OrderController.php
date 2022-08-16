@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Customer;
+use App\Models\Member;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 
@@ -18,11 +19,11 @@ class OrderController extends Controller
         $this->orderServices = $orderServices;
     }
 
-    public function index(Cart $cart)
+    public function index()
     {
         return view('admin.orders.list', [
            'title'=>'Danh sách đơn hàng',
-            'orders' => Customer::with('carts')->latest()->get(),
+           'orders' => Customer::with('carts')->latest()->get()
         ]);
     }
 

@@ -82,12 +82,12 @@ $("#check_out").click(function (){
             if(result){
                 window.location.href = "/checkout";
             }else {
-                alert('Sai');
+                alert('false');
             }
 
         },
-        error: function() {
-            //
+        error: function(error) {
+            console.log(error)
         }
     })
 })
@@ -99,9 +99,6 @@ function updateActive(id, url)
         $.ajax({
             type: 'POST',
             datatype: 'JSON',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
             data: { id },
             url: url,
             success: function (result){

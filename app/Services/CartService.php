@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Cart;
 use App\Models\Customer;
+use App\Models\Member;
 use App\Models\Product;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -102,6 +103,5 @@ class CartService
         }
         return false;
     }
-
 
 }

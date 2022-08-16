@@ -16,4 +16,9 @@ class Member extends Authenticatable
         'address',
         'phone'
     ];
+    public function carts()
+    {
+        //liên kết 1-n 1 khách hàng có nhiều lựa chọn
+        return $this->hasMany(Cart::class, 'member_id', 'id');
+    }
 }
