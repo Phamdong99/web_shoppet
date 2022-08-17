@@ -22,11 +22,17 @@ class CheckoutService
     //Lưu cart vào db
     public function addCart($request)
     {
+//        $view_cart = Session::get('carts');
+//        $carts = $request->input('cart_item');
+//        var_dump($carts);
+//        var_dump($view_cart);
+//        dd();
         $member_id = (int)$request->input('member_id');
         $pay_id = (int)$request->input('pay_id');
         try {
             DB::beginTransaction();//khi chạy try mà gặp lỗi thì commit để tránh bị dư dữ liệu
             $carts = $request->input('cart_item');
+
             if(is_null($carts)) return false;
 
 //           Insert vào db customer
@@ -48,7 +54,17 @@ class CheckoutService
             //queue
             SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
 
-            //Session::flush();
+            //lấy về giỏ hàng
+            $view_cart = Session::get('carts');
+//            Update cart
+            foreach ($carts as $key => $item) {
+                //kiểm tra key có nằm trong view_cart hay không
+                if (array_key_exists($key,$view_cart)) {
+//                    Nếu có unset xóa sau khi thanh toán thành công
+                   unset($view_cart[$key]);
+                }
+            }
+            Session::put('carts', $view_cart);
 
             return $insert_cart;
 

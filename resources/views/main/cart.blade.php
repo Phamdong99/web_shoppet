@@ -15,7 +15,7 @@
 {{--            @php--}}
 {{--            $total = 0;--}}
 {{--            @endphp--}}
-{{--            @if(isset($products) && count($products) > 0)--}}
+{{--            @if(isset($products) && count($products) > 0 && count($carts) > 0)--}}
 {{--            @foreach($products as $product)--}}
 {{--                    @php--}}
 {{--                      $price = (\App\Helper\Helper::price2($product->price, $product->price_sale));--}}

@@ -43,7 +43,7 @@
                         </li>
 
                         <li>
-                            <a href="about.html">Tin tức</a>
+                            <a href="https://vnexpress.net/tag/thu-cung-738044">Tin tức</a>
                         </li>
 
                         <li>

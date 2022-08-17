@@ -71,7 +71,7 @@ class CartHomeController extends Controller
         return view('main.cart', [
             'title' => 'Giỏ Hàng',
             'products' => $products,
-            'carts'=> Session::get('carts')
+            'carts'=> Session::get('carts')??[]
         ]);
 
     }

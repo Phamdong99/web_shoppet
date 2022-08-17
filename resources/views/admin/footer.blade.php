@@ -80,7 +80,7 @@
 <script>
     //getAttribute() : trả về phần tử được chỉ định
     //target lựa chọn phần tử được chỉ định
-    $(document).ready(function () {
+    $(document).each(function () {
         $(".active").on('change', function (e) {
             let active = e.target.value;
             let cart_id = e.target.getAttribute("data-cart");
