@@ -6,17 +6,18 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Main\CartHomeController;
+use App\Http\Controllers\Main\CategoryHomeController;
 use App\Http\Controllers\Main\CheckOutController;
 use App\Http\Controllers\Main\HistoryOrderController;
 use App\Http\Controllers\Main\LoginHomeController;
 use App\Http\Controllers\Main\MainHomeController;
-use App\Http\Controllers\Main\CategoryHomeController;
 use App\Http\Controllers\Main\ProductHomeController;
 use App\Http\Controllers\Main\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -99,6 +100,15 @@ Route::middleware(['auth'])->group(function (){
                 Route::DELETE('destroy', [SizeController::class, 'destroy']);
             });
 
+            #PaymentMethod
+            Route::prefix('payment_methods')->group(function () {
+                Route::get('list', [PaymentMethodController::class, 'index']);
+                Route::get('add', [PaymentMethodController::class, 'create']);
+                Route::post('add', [PaymentMethodController::class, 'store']);
+                Route::DELETE('destroy', [PaymentMethodController::class, 'destroy']);
+            });
+
+
             #review
             Route::prefix('reviews')->group(function () {
                 Route::get('list', [ReviewController::class, 'index']);
@@ -124,6 +134,8 @@ Route::get('/danh-muc/{id}-{slug}.html', [CategoryHomeController::class, 'index'
 Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'index']);
 Route::post('/services/load-product',[MainHomeController::class, 'loadProduct']);
 Route::post('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'add_review']);
+Route::post('/show_pro_detail',[MainHomeController::class, 'show_pro_detail']);
+
 
 
 
@@ -137,7 +149,7 @@ Route::middleware(['auth:member'])->group(function () {
     Route::post('update-cart', [CartHomeController::class, 'update']);
     Route::get('carts/delete/{id}', [CartHomeController::class, 'remove']);
     Route::post('add-cart/cart', [CartHomeController::class, 'index_cart']);
-    Route::get('carts/cart', [CartHomeController::class, 'show_cart']);
+//    Route::get('carts/cart', [CartHomeController::class, 'show_cart']);
     Route::post('check-out', [CheckOutController::class, 'index']);
     Route::get('checkout', [CheckOutController::class, 'checkout']);
     Route::post('checkout', [CheckOutController::class, 'addCart']);

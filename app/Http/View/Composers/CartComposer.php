@@ -20,6 +20,7 @@ class CartComposer
 
 //        load cart
         $carts = Session::get('carts');
+
         if(is_null($carts)) return[];
 
         $productId = array_keys($carts);
@@ -28,8 +29,8 @@ class CartComposer
             ->whereIn('id', $productId)
             ->get();
 
-//        $view->with('cart_products', $products);
-//        $view->with('carts', $carts);
+        $view->with('products_cart', $products);
+        $view->with('carts_qty', $carts);
 
 
 

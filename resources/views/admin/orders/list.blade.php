@@ -4,8 +4,8 @@
     <div class="card">
         <!-- /.card-header -->
         <div class="card-body">
-            <button type="button" class="btn btn-primary btn-lg">
-                <a href="/admin/products/add" style="color: white">Thêm mới</a></button>
+{{--            <button type="button" class="btn btn-primary btn-lg">--}}
+{{--                <a href="/admin/products/add" style="color: white">Thêm mới</a></button>--}}
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>

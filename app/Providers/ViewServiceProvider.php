@@ -31,7 +31,7 @@ class ViewServiceProvider extends ServiceProvider
         View::composer('main/header', CategoryComposer::class);
         View::composer('main/footer', CategoryComposer::class);
         View::composer('main/footer', ContactComposer::class);
-//        View::composer('main/cart', CartComposer::class);
+        View::composer('main/cart', CartComposer::class);
 
     }
 }

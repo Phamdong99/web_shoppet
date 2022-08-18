@@ -114,6 +114,8 @@ class ProductService
             ->with('menu')
             -> firstOrFail();
     }
+
+    //lấy ra sp liên quan
     public function more($id)
     {
         return Product::where('active', 1)

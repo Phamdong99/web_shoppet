@@ -64,16 +64,16 @@ class CartHomeController extends Controller
 
     }
 
-    public function show_cart()
-    {
-        $products = $this->cartService->getProduct();
-
-        return view('main.cart', [
-            'title' => 'Giỏ Hàng',
-            'products' => $products,
-            'carts'=> Session::get('carts')??[]
-        ]);
-
-    }
+//    public function show_cart()
+//    {
+//        $products = $this->cartService->getProduct();
+//
+//        return view('main.cart', [
+//            'title' => 'Giỏ Hàng',
+//            'products' => $products,
+//            'carts'=> Session::get('carts')??[]
+//        ]);
+//
+//    }
 
 }

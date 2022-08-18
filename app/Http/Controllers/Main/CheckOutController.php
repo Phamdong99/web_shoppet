@@ -69,10 +69,6 @@ class CheckOutController extends Controller
                 $vnp_Locale = 'VN';
                 $vnp_BankCode = 'NCB';
                 $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-//Add Params of 2.0.1 Version
-//                $vnp_ExpireDate = $_POST['txtexpire'];
-//Billing
-
                 $inputData = array(
                     "vnp_Version" => "2.1.0",
                     "vnp_TmnCode" => $vnp_TmnCode,

@@ -84,6 +84,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/admin/payment_methods/list" class="nav-link">
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p>
+                            Phương thức TT
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/admin/reviews/list" class="nav-link">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>

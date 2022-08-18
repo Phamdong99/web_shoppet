@@ -116,4 +116,21 @@ function updateActive(id, url)
         })
     }
 }
+function show_pro_detail(id_pro_detail,url)
+{
+    $.ajax({
+        type: 'POST',
+        datatype: 'JSON',
+        data: { id_pro_detail },
+        url: url,
+        success: function (result){
+
+           return (result)
+        },
+        error: function (error) {
+            console.log(error)
+        }
+
+    })
+}
 

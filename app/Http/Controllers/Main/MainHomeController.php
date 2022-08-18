@@ -64,4 +64,17 @@ class MainHomeController extends Controller
             'products'=>$product
         ]);
     }
+
+    #show chi tiết sản phẩm
+    public function show_pro_detail(Request $request)
+    {
+//        $id_pro_detail = $request->input('id_pro_detail');
+//        $pro_details = Product::where('id',$id_pro_detail)
+//            ->where('active', 1)
+//            ->with('menu')
+//            -> firstOrFail();
+//        return view('main.pro_detail_view', [
+//            'pro_details'=>$pro_details
+//        ]);
+    }
 }
