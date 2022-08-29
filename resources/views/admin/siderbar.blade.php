@@ -92,6 +92,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/admin/discounts/list" class="nav-link">
+                        <i class="nav-icon fas fa-percent"></i>
+                        <p>
+                            Mã giảm giá
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/transports/list" class="nav-link">
+                        <i class="nav-icon fas fa-dolly"></i>
+                        <p>
+                            Hình thức vận chuyển
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/admin/reviews/list" class="nav-link">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>
@@ -108,21 +124,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admin/products/list" class="nav-link">
+                    <a href="https://vnexpress.net/tag/thu-cung-738044" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
                             Tin Tức
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="/admin/products/list" class="nav-link">
-                        <i class="nav-icon fab fa-alipay"></i>
-                        <p>
-                            Dịch Vụ
-                        </p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="/admin/contacts/list" class="nav-link">
                         <i class="nav-icon far fa-address-card"></i>

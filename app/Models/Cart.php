@@ -14,7 +14,9 @@ class Cart extends Model
       'active',
         'total',
         'pay_id',
-        'member_id'
+        'member_id',
+        'type',
+        'content_return'
     ];
 
     public function cartdetails()

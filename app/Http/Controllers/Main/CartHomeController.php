@@ -35,9 +35,8 @@ class CartHomeController extends Controller
             'products' => $products,
             'carts'=> Session::get('carts')
         ]);
-
     }
-
+//cập nhật số lượng trong giỏ hàng
     public function update(Request $request)
     {
         $this->cartService->update($request);
@@ -53,27 +52,4 @@ class CartHomeController extends Controller
         return redirect('/carts');
 
     }
-
-    public function index_cart(Request $request)
-    {
-        $result = $this->cartService->create($request);
-        if ($result === false) {
-            return redirect()->back();
-        }
-        return redirect('/carts');
-
-    }
-
-//    public function show_cart()
-//    {
-//        $products = $this->cartService->getProduct();
-//
-//        return view('main.cart', [
-//            'title' => 'Giỏ Hàng',
-//            'products' => $products,
-//            'carts'=> Session::get('carts')??[]
-//        ]);
-//
-//    }
-
 }

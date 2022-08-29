@@ -20,7 +20,7 @@
                         </a>
 
                         <span class="stext-105 cl3">
-									{!!  \App\Helper\Helper::price($product->price, $product->price_sale) !!}
+									{!!  \App\Helper\Helper::price3($product->product_sizes[0]->price) !!}
                             </span>
                     </div>
 

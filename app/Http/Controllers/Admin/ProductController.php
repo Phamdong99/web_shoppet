@@ -7,6 +7,7 @@ use App\Http\Requests\Products\CreateFormRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
 
 class ProductController extends Controller
 {
@@ -19,9 +20,12 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('admin.products.list', [
+        $products = Product::with('product_sizes.sizes')->latest()->get();
+
+        return view('admin.products.list',[
            'title'=>'Danh sách sản phẩm',
-            'products'=>$this->productService->getAll()
+            'products'=>$products,
+
         ]);
     }
     public function create()
@@ -34,8 +38,14 @@ class ProductController extends Controller
 
     public function store(CreateFormRequest $request)
     {
-        $this->productService->create($request);
-        return redirect()->back();
+        if($request->input('cate_id') != 0){
+            $this->productService->create($request);
+            return redirect()->back();
+        }else{
+            \Illuminate\Support\Facades\Session::flash('error', 'Vui lòng chọn danh mục cho sản phẩm');
+            return redirect()->back();
+        }
+
     }
 
     public function show(Product $product)
@@ -61,7 +71,7 @@ class ProductController extends Controller
         if($result){
             return \response()->json([
                 'error'=>false,
-                'message'=>'Xoá danh mục thành công'
+                'message'=>'Xoá sản phẩm thành công'
             ]);
         }
         return \response()->json([

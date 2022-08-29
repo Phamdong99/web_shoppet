@@ -5,17 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Size extends Model
+class Transport extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'size',
-        'active'
+      'name',
+      'price'
     ];
-
-    public function product_sizes()
-    {
-        return $this->hasMany(ProductSize::class, 'size_id', 'id');
-    }
 }

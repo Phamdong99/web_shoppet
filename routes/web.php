@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MemberController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\TransportController;
 use App\Http\Controllers\Admin\UploadController;
 use App\Http\Controllers\Main\CartHomeController;
 use App\Http\Controllers\Main\CategoryHomeController;
@@ -108,6 +110,21 @@ Route::middleware(['auth'])->group(function (){
                 Route::DELETE('destroy', [PaymentMethodController::class, 'destroy']);
             });
 
+            #Discount
+            Route::prefix('discounts')->group(function () {
+                Route::get('list', [DiscountController::class, 'index']);
+                Route::get('add', [DiscountController::class, 'create']);
+                Route::post('add', [DiscountController::class, 'store']);
+                Route::DELETE('destroy', [DiscountController::class, 'destroy']);
+            });
+            #Transport
+            Route::prefix('transports')->group(function () {
+                Route::get('list', [TransportController::class, 'index']);
+                Route::get('add', [TransportController::class, 'create']);
+                Route::post('add', [TransportController::class, 'store']);
+                Route::DELETE('destroy', [TransportController::class, 'destroy']);
+            });
+
 
             #review
             Route::prefix('reviews')->group(function () {
@@ -132,6 +149,7 @@ Route::get('member/logout',[LoginHomeController::class, 'logout']);
 Route::get('/', [MainHomeController::class, 'index'])->name('main');
 Route::get('/danh-muc/{id}-{slug}.html', [CategoryHomeController::class, 'index']);
 Route::get('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'index']);
+Route::post('update_price_size', [ProductHomeController::class, 'update_price_size']);
 Route::post('/services/load-product',[MainHomeController::class, 'loadProduct']);
 Route::post('/san-pham/{id}-{slug}.html',[ProductHomeController::class, 'add_review']);
 Route::post('/show_pro_detail',[MainHomeController::class, 'show_pro_detail']);
@@ -148,13 +166,17 @@ Route::middleware(['auth:member'])->group(function () {
     Route::get('carts', [CartHomeController::class, 'show']);
     Route::post('update-cart', [CartHomeController::class, 'update']);
     Route::get('carts/delete/{id}', [CartHomeController::class, 'remove']);
-    Route::post('add-cart/cart', [CartHomeController::class, 'index_cart']);
 //    Route::get('carts/cart', [CartHomeController::class, 'show_cart']);
     Route::post('check-out', [CheckOutController::class, 'index']);
+    Route::post('update_total_checkout', [CheckOutController::class, 'update_total_checkout']);
+    Route::post('discount/price', [CheckOutController::class, 'discount_price']);
+    Route::post('transport/price', [CheckOutController::class, 'transport_price']);
     Route::get('checkout', [CheckOutController::class, 'checkout']);
     Route::post('checkout', [CheckOutController::class, 'addCart']);
     Route::get('history', [HistoryOrderController::class, 'history_order'])->name('history');
     Route::get('orders/show_detail/{cart}', [HistoryOrderController::class, 'show_detail_order']);
+    Route::get('orders/return_goods/{cart}', [HistoryOrderController::class, 'return_goods_order']);
+    Route::post('orders/return_goods/{cart}', [HistoryOrderController::class, 'return_goods'])->name('return_goods');
     Route::post('history/update_active', [HistoryOrderController::class, 'update_active']);
 });
 

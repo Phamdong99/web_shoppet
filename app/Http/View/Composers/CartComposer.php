@@ -29,8 +29,8 @@ class CartComposer
             ->whereIn('id', $productId)
             ->get();
 
-        $view->with('products_cart', $products);
-        $view->with('carts_qty', $carts);
+        $view->with('products_cart', $products) ?? [];
+        $view->with('carts_qty', $carts)?? [];
 
 
 

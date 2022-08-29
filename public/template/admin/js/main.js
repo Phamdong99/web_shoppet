@@ -70,3 +70,33 @@ $('#upload').change(function (){
         }
     })
 })
+
+//add size add price
+$(document).ready(function (){
+    var max_fields = 10;
+    var wrapper_size = $(".wrapper_size");
+    var add_button = $(".add_field_button");
+
+    var x = 1;
+    $(add_button).click(function (e){
+        e.preventDefault();//để ngăn trặn việc gửi nội dung trên form đến nơi xử lý khi nhấn vào button
+        if(x < max_fields){
+            x++
+            $(wrapper_size).append('<tr>' +
+                '<td width="70%">' +
+                '<label>Nhập size :  </label>' +
+                '<input type="text" name="size[]" placeholder="Nhập size cho sản phẩm"/>' +
+                '<label>Nhập giá : </label>' +
+                '<input type="number" name="price[]" placeholder="Nhập giá theo size"/> ' +
+                '<label>Nhập số lượng : </label>' +
+                '<input type="number" name="qty[]" placeholder="Nhập số lượng"/> ' +
+                '</td> '+
+                '<td width="10%"><span class="remove btn btn-danger" style="cursor:pointer;">Xóa</span></td></tr>')
+        }
+    });
+    $(wrapper_size).on("click",".remove", function (e){
+        e.preventDefault() ;
+        //parents lấy thành phần cha của div để remove
+        $(this).parents('tr').remove();
+    });
+});

@@ -1,13 +1,11 @@
 @extends('admin.main')
-@section('head')
-    <script src="/ckeditor/ckeditor.js"></script>
-@endsection
+
 @section('content')
     <form action="" method="post" enctype="multipart/form-data">
         <div class="card-body">
             <div class="form-group">
                 <label for="menu">Tên sản phẩm</label>
-                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Nhập tên danh mục">
+                <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Nhập tên">
             </div>
 
             <div class="form-group">
@@ -30,21 +28,44 @@
                 </select>
 
             </div>
-
-            <div class="form-group">
-                <label for="menu">Giá sản phẩm</label>
-                <input type="text" class="form-control" name="price"  value="{{old('price')}}" placeholder="Giá sản phẩm">
+{{--------------Add size add price--}}
+            <div class="card">
+                <table class="wrapper_size" width="100%">
+                    <thead>
+                    <tr>
+                        <td style="margin-left: 100px" width="20%" colspan="4"><span class="add_field_button btn btn-primary">Thêm size</span></td>
+                    </tr>
+                    </thead>
+                    <tbody class="container">
+                    <tr>
+                        <td width="90%">
+                            <label>Nhập size : </label>
+                            <input type="text" name="size[]" value="{{old('size')}}"placeholder="Nhập size cho sản phẩm"/>
+                            <label>Nhập giá : </label>
+                            <input type="number" name="price[]" value="{{old('price')}}" placeholder="Nhập giá theo size"/>
+                            <label>Nhập số lượng : </label>
+                            <input type="number" name="qty[]" value="{{old('qty')}}" placeholder="Nhập số lượng"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+{{--            ----------------}}
+            <br>
+{{--            <div class="form-group">--}}
+{{--                <label for="menu">Giá sản phẩm</label>--}}
+{{--                <input type="text" class="form-control" name="price"  value="{{old('price')}}" placeholder="Giá sản phẩm">--}}
+{{--            </div>--}}
 
-            <div class="form-group">
-                <label for="menu">Giá sản phẩm đã giảm giá</label>
-                <input type="text" class="form-control" name="price_sale" value="{{old('price_sale')}}" placeholder="Giá sản phẩm đã giảm giá">
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="menu">Giá sản phẩm đã giảm giá</label>--}}
+{{--                <input type="text" class="form-control" name="price_sale" value="{{old('price_sale')}}" placeholder="Giá sản phẩm đã giảm giá">--}}
+{{--            </div>--}}
 
-            <div class="form-group">
-                <label>Tổng số lượng</label>
-                <input type="number" class="form-control" name="qty" value="" placeholder="Nhập số lượng">
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label>Tổng số lượng</label>--}}
+{{--                <input type="number" class="form-control" name="qty" value="" placeholder="Nhập số lượng">--}}
+{{--            </div>--}}
 
             <div class="form-group">
                 <label for="menu">Ảnh</label>
@@ -73,8 +94,4 @@
         @csrf
     </form>
 @endsection
-@section('footer')
-    <script>
-        CKEDITOR.replace( 'content' );
-    </script>
-@endsection
+

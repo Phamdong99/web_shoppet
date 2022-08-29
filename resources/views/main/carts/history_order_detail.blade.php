@@ -28,6 +28,9 @@
                             <th class="column-3">Giá</th>
                             <th class="column-4">Số lượng</th>
                             <th class="column-5">Tổng tiền</th>
+                            @if($cart_content->active == 6)
+                            <th>Sản phẩm hoàn trả</th>
+                            @endif
                         </tr>
                         @foreach($carts as $key => $cart)
                             <tr>
@@ -45,18 +48,31 @@
                                 <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
                                 <td class="column-4">{{ $qty }}</td>
                                 <td class="column-5">{{ number_format($price_total, 0, '', '.') }}</td>
+                                @if($cart_content->active == 6)
+                                <td>
+                                    <input type="checkbox" checked>
+                                </td>
+                                @endif
                             </tr>
                         @endforeach
+                        @if($cart_content->active != 6)
                         <tr>
                             <td colspan="4" class="text-right">Tổng Tiền : </td>
-                            <td>{{ number_format($total, 0, '', '.')  }} VND</td>
+                            <td>{{ number_format($total, 0, '', '.')  }} VND <span>(Đã bao gồm phí vận chuyển)</span></td>
                         </tr>
                         <tr>
                             <td colspan="4" class="text-right">Thanh toán : </td>
                             <td>{{ $payment_method }}</td>
                         </tr>
+                        @endif
                         </tbody>
                     </table>
+                    @if($cart_content->active == 6)
+                        <div>
+                            <span>Lý do hoàn trả : </span>
+                            {{ $cart_content->content_return }}
+                        </div>
+                    @endif
                     <div class="p-l-300">
                         <a href="/history" class="btn btn-primary">Trở lại trang lịch sử</a>
                     </div>

@@ -40,7 +40,7 @@ class LoginHomeController extends Controller
     {
 //        Auth::logout();
         (Auth::guard('member'))->logout();
-        return redirect('member/login');
+        return redirect('/');
     }
 
     public function information()

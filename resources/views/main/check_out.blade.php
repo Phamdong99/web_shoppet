@@ -17,17 +17,20 @@
                                     <tr class="table_head">
                                         <th class="column-2">Ảnh</th>
                                         <th class="column-3">Tên</th>
+                                        <th>Size</th>
                                         <th class="column-4">Giá</th>
                                         <th class="column-5">Số Lượng</th>
                                         <th class="column-6">Tổng tiền</th>
                                     </tr>
                                     @foreach($products as $key => $product)
-                                        @php
-                                            $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
-                                            $priceEnd = $price * $carts[$product->id];
+                                        @foreach($carts[$product->id] as $size_id => $product_cart)
+                                            @foreach($arrproduct[$product->id] as $k => $arrsize)
+                                                @if($size_id == $arrsize)
+                                            @php
+                                            $priceEnd = $product_cart['price'] * $product_cart['qty'];
                                             $total += $priceEnd;
-                                        @endphp
-                                        <input type="hidden" name="cart_item[{{$product->id}}]" value="{{ $carts[$product->id] }}">
+                                            @endphp
+                                        <input type="hidden" name="cart_item[{{$product->id}}]" value="{{ $product_cart['qty'] }}" data-size-id="{{ $arrsize }}">
                                         <input type="hidden" name="member_id" value="{{  Auth::guard('member')->user()->id }}">
                                         <tbody>
                                         <tr class="table_row">
@@ -37,13 +40,17 @@
                                                 </div>
                                             </td>
                                             <td class="column-3">{{ $product->name }}</td>
-                                            <td class="column-4">{{ number_format($price, 0, '', '.') }} VND</td>
+                                            <td>{{ $product_cart['label'] }}</td>
+                                            <td class="column-4">{{ $product_cart['price'] }}</td>
                                             <td class="column-5">
-                                                {{ $carts[$product->id] }}
+                                                {{ $product_cart['qty'] }}
                                             </td>
-                                            <td class="column-6">{{ number_format($priceEnd, 0, '', '.') }} VND</td>
+                                            <td class="column-6">{{ $priceEnd }} </td>
                                         </tr>
                                         </tbody>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
                                     @endforeach
                                 </table>
                             </div>
@@ -57,16 +64,77 @@
                                         Quay lại giỏ hàng
                                     </a>
                                 </div>
+                                <div class="flex-w flex-t">
+                                    <div class="size-208">
+                                            <span class="mtext-101 cl2 pull-right">
+                                                 Tổng:
+                                            </span>
+                                    </div>
+
+                                    <div class="size-209 pull-right">
+                                            <span class="mtext-110 cl2 " >
+                                                 {{ number_format($total, 0, '', '.') }} VND
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card">
+                                <h4>Hình thức vận chuyển</h4>
+                                <br>
+                                @foreach($transports as $key => $transport)
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input value="{{ $transport->id }}" type="radio" id="type" name="type" >
+                                        <label for="type" class="custom-control-label">{{ $transport->name }}</label>
+                                        <label for="type" class="custom-control-label p-l-115">{{ number_format($transport->price). ' Vnd' }}</label>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            <div class="card p-t-10">
+                                <h4>Mã giảm giá</h4>
+                                <br>
+                                <select class="form-select" id="discount_id">
+                                    <option selected>--Bạn có thể chọn mã giảm giá cho đơn hàng--</option>
+                                    @foreach($discounts as $key => $discount)
+                                    <option value="{{ $discount->id }}">{{ $discount->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
                         <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                            <div class="flex-w flex-t p-t-27 p-b-20">
+                                <div class="size-208">
+                                    <span class="mtext-101 cl2">Phí VC:</span>
+                                </div>
+
+                                <div class="size-209 p-t-1">
+                                    <span class="mtext-110 cl2" id="price_transport">
+                                        0
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex-w flex-t p-t-5 p-b-33">
+                                <div class="size-208">
+                                    <span class="mtext-101 cl2">
+                                        Giảm giá:
+                                    </span>
+                                </div>
+
+                                <div class="size-209 p-t-1">
+                                    <span class="mtext-110 cl2" id="discount">
+                                        0
+                                    </span>
+                                </div>
+                            </div>
+
                             <h4 class="mtext-109 cl2 p-b-30">
                                 Tổng đơn hàng
                             </h4>
-
                             <div class="flex-w flex-t p-t-27 p-b-33">
                                 <div class="size-208">
                                     <span class="mtext-101 cl2">
@@ -75,11 +143,15 @@
                                 </div>
 
                                 <div class="size-209 p-t-1">
-                                    <span class="mtext-110 cl2">
+                                    <span class="mtext-110 cl2"  id="total_order">
                                         {{ number_format($total, 0, '', '.') }} VND
+                                        <input type="hidden" class="total" id="total" value="{{$total}}">
                                     </span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+
                             <div class="flex-w flex-t bor12 p-t-15 p-b-30">
 
                                 <div class="size-100 p-r-18 p-r-0-sm w-full-ssm">

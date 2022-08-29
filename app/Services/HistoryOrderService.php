@@ -20,4 +20,17 @@ class HistoryOrderService
         return false;
 
     }
+    public function updateActive1($cart, $request)
+    {
+        $id = (int)$request->input('id_order');
+        if($id)
+        {
+            return Cart::where('id', $id)->update([
+                'active'=> 6,
+                'content_return'=>$request->input('content_return')
+            ]);
+        }
+        return false;
+
+    }
 }

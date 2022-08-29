@@ -5,9 +5,11 @@ namespace App\Services;
 use App\Jobs\SendMail;
 use App\Models\Cart;
 use App\Models\Customer;
+use App\Models\Discount;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 
+use App\Models\Transport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -18,17 +20,29 @@ class CheckoutService
     {
         return PaymentMethod::where('active', 1)->get();
     }
+    public function getDis()
+    {
+        return Discount::where('active', 1)->get();
+    }
+    public function getTran()
+    {
+        return Transport::get();
+    }
 
     //Lưu cart vào db
     public function addCart($request)
     {
 //        $view_cart = Session::get('carts');
-//        $carts = $request->input('cart_item');
+        $carts = $request->input('cart_item');
+        dd($carts);
 //        var_dump($carts);
 //        var_dump($view_cart);
 //        dd();
+        $type_cost = Session::get('type_cost');
         $member_id = (int)$request->input('member_id');
         $pay_id = (int)$request->input('pay_id');
+        $type = (int)$request->input('type');
+
         try {
             DB::beginTransaction();//khi chạy try mà gặp lỗi thì commit để tránh bị dư dữ liệu
             $carts = $request->input('cart_item');
@@ -46,14 +60,13 @@ class CheckoutService
             ]);
 
 //          Insert vào db cart
-            $insert_cart = $this->infoProductCart($carts, $customer->id, $pay_id, $member_id);
+            $insert_cart = $this->infoProductCart($carts, $customer->id, $pay_id, $member_id,$type,$type_cost);
             DB::commit();
 
             Session::flash('success', 'Bạn đã đặt hàng thành công');
 
             //queue
             SendMail::dispatch($request->input('email'))->delay(now()->addSeconds(2));
-
             //lấy về giỏ hàng
             $view_cart = Session::get('carts');
 //            Update cart
@@ -74,12 +87,12 @@ class CheckoutService
         }
         return false;
     }
-    public function infoProductCart($carts, $customer_id, $pay_id, $member_id)
+    public function infoProductCart($carts, $customer_id, $pay_id, $member_id,$type,$type_cost)
     {
-
         $cart = Cart::create([
             'cus_id'=>$customer_id,
             'active' => 1,
+            'type' => $type,
             'total'=> 0,
             'pay_id'=>$pay_id,
             'member_id'=>$member_id
@@ -91,7 +104,7 @@ class CheckoutService
 
         foreach ($carts as $key => $item){
             $product = $this->getDetailProduct($key);
-            $price = $product->price_sale != 0 ? $product->price_sale : $product->price;
+            $price = $product->product_sizes[0]->price;
             $total += $price * $item;
             //số lượng còn lại
             $qty_pro = $product->qty - $item;
@@ -108,13 +121,22 @@ class CheckoutService
                 'qty' => $qty_pro
             ]);
         }
+        if($type_cost == 1){
+            $total += 20000;
+        }else
+        {
+            $total += 10000;
+        }
         // insert vao bang cart
+
         $cart->update([
+
             'total' => $total
         ]);
 
         return $cart;
     }
+
     public function getDetailProduct($id)
     {
         return Product::where(['id' => $id, 'active' => 1])

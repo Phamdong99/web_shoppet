@@ -14,22 +14,33 @@
                     <th>Tên sản phẩm</th>
                     <th>Danh mục</th>
                     <th>Giá</th>
-                    <th>Giá giảm giá</th>
-                    <th>Số lượng</th>
+{{--                    <th>Giá giảm giá</th>--}}
+{{--                    <th>Số lượng</th>--}}
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
                 </thead>
                 <tbody>
+
                 @foreach($products as $key => $product)
                 <tr>
                     <td>{{ $product->id }}</td>
                     <td><img src="{{ $product->file }}" alt="" width="60px"></td>
-                    <td>{{ $product->name }}</td>
+                    <td>
+                        {{ $product->name }}
+                        <br>
+                        @foreach($product->product_sizes as $item)
+                        {{ $item->sizes->size.' ' }}
+                        @endforeach
+                    </td>
                     <td>{{ $product->category->name }}</td>
-                    <td>{{ number_format($product->price)}} </td>
-                    <td>{{ number_format($product->price_sale)}} </td>
-                    <td>{{ $product->qty }}</td>
+                    @php
+                        $numbers = array_column($product->product_sizes->toArray(), 'price');
+                        $min = min($numbers);
+                        $max = max($numbers);
+                    @endphp
+                    <td>{{ number_format($min) }}-{{number_format($max).' Vnd'}}</td>
+
                     <td>{!! App\Helper\Helper::active($product->active) !!}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="/admin/products/edit/{{$product->id}}">

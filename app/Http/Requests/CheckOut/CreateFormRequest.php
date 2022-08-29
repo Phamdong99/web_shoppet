@@ -28,6 +28,7 @@ class CreateFormRequest extends FormRequest
             'phone' => 'required',
             'address'=>'required',
             'email' => 'required',
+            'type'=>'required'
         ];
     }
     public function messages()
@@ -36,7 +37,8 @@ class CreateFormRequest extends FormRequest
             'name.required' => 'Vui lòng nhập tên người nhận !',
             'phone.required' => 'Vui lòng nhập số điện thoại !',
             'address.required' => 'Vui lòng nhập địa chỉ nhận hàng !',
-            'email.required' => 'Vui lòng nhập email !'
+            'email.required' => 'Vui lòng nhập email !',
+            'type.required'=>'Vui lòng chọn hình thức vận chuyển '
 
         ];
     }

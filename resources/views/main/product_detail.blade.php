@@ -73,16 +73,20 @@
                                {{$title}}
                            </h4>
 
-                           <span class="mtext-106 cl2">
-							 {!!  \App\Helper\Helper::price($product->price, $product->price_sale) !!}
-						</span>
+                           <span class="mtext-106 cl2" id="p-price" name="p_price">
+							{{-- {!!  \App\Helper\Helper::price3($product->product_sizes[0]->price) !!}--}}
+                               {{--@foreach($price_size as $key => $item)
+                               {{ number_format($item->price). ' Vnd' }}
+                               @endforeach--}}
+                               {{number_format($min)}}-{{number_format($max). ' Vnd'}}
+						    </span>
 
                            <p class="stext-102 cl3 p-t-23">
                                {{ $product->content }}
                            </p>
 
                            <!--  -->
-                               @if($product->price != 0)
+                               @if($product->product_sizes[0]->price != 0)
                                    <div class="p-t-33">
                                        <form method="post" action="/add-cart">
                                            <input type="hidden" name="pro_id" id="pro_id" value="{{$product->id}}">
@@ -90,13 +94,12 @@
                                                <div class="size-203 flex-c-m respon6">
                                                    Size
                                                </div>
-
                                                <div class="size-204 respon6-next">
                                                    <div class="rs1-select2 bor8 bg0">
-                                                       <select class="js-select2" name="size_id" style="cursor:pointer;">
-                                                           <option value="0">--Chọn size--</option>
-                                                           @foreach($sizes as $key => $size)
-                                                           <option value="{{ $size->id }}" >{{ $size->size }}</option>
+                                                       <select class="js-select2" name="size_id" id="size_id" id-product="{{$product->id}}" style="cursor:pointer;" required>
+                                                           <option value="">--Chọn size--</option>
+                                                           @foreach($size_pros as $key => $size_pro)
+                                                           <option value="{{ $size_pro->sizes->id }}" >{{ $size_pro->sizes->size }}</option>
                                                            @endforeach
                                                        </select>
                                                        <div class="dropDownSelect2"></div>
@@ -114,7 +117,7 @@
                                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
                                                               id="num-product"
                                                               name="num_product" value="1"
-                                                              data-product-max="{{$product->qty}}">
+                                                              data-product-max="{{$product->product_sizes[0]->qty}}">
 
                                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                            <i class="fs-16 zmdi zmdi-plus"></i>

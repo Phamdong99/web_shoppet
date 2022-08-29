@@ -16,6 +16,7 @@
                     <th>Ngày đặt hàng</th>
                     <th>Tổng tiền đơn hàng</th>
                     <th>Trạng thái đơn hàng</th>
+                    <th>Hình thức vận chuyển</th>
                     <th>Hành động</th>
                 </tr>
                 </thead>
@@ -38,6 +39,7 @@
                             <option value="6" {{ $order->carts[0]->active == 6 ? 'selected' : ''}}>Đơn hàng hoàn trả</option>
                         </select>
                     </td>
+                    <td>{{ \App\Helper\Helper::active2($order->carts[0]->type) }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="/admin/orders/show/{{$order->carts[0]->id}}">
                             <i class="fas fa-eye"></i>

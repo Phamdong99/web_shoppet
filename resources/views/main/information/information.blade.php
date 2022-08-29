@@ -34,6 +34,9 @@
                                 Số điện thoại : {{ $member->phone }}
                             </div>
                         </div>
+                        <span>Đi tới trang chủ ? <a href="/">click</a></span>
+                        <br>
+                        <span>Đi tới lịch sử đặt hàng ? <a href="/history">click</a></span>
                         @csrf
                     </form>
                 @endforeach

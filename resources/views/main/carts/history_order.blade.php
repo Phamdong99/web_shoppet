@@ -124,6 +124,7 @@
                                 <th>Ngày đặt hàng</th>
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
+                                <th>Hình thức vận chuyển</th>
                                 <th>Hành động</th>
                             </tr>
                             @foreach($orders as $order)
@@ -132,6 +133,7 @@
                                         <td>{{ $order->created_at }}</td>
                                         <td>{{ number_format($order->total) }}</td>
                                         <td>{{ \App\Helper\Helper::active1($order->active) }}</td>
+                                        <td>{{ \App\Helper\Helper::active2($order->type) }}</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm" href="/orders/show_detail/{{$order->id}}">
                                                 Xem
@@ -148,6 +150,7 @@
                                 <th>Ngày đặt hàng</th>
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
+                                <th>Hình thức vận chuyển</th>
                                 <th>Hành động</th>
                             </tr>
                             @foreach($orders as $order)
@@ -157,6 +160,7 @@
                                 <td>{{ $order->created_at }}</td>
                                 <td>{{ number_format($order->total) }}</td>
                                 <td style="color: #0c525d">Chờ xác nhận</td>
+                                <td>{{ \App\Helper\Helper::active2($order->type) }}</td>
                                 <td>
                                     <a class="btn btn-primary btn-sm" href="/orders/show_detail/{{$order->id}}">
                                         Xem
@@ -178,6 +182,7 @@
                                 <th>Ngày đặt hàng</th>
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
+                                <th>Hình thức vận chuyển</th>
                                 <th>Hành động</th>
                             </tr>
                             @foreach($orders as $order)
@@ -187,6 +192,7 @@
                                         <td>{{ $order->created_at }}</td>
                                         <td>{{ number_format($order->total) }}</td>
                                         <td style="color: #0c84ff">Chờ lấy hàng</td>
+                                        <td>{{ \App\Helper\Helper::active2($order->type) }}</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm" href="/orders/show_detail/{{$order->id}}">
                                                 Xem
@@ -204,6 +210,7 @@
                                 <th>Ngày đặt hàng</th>
                                 <th>Tổng tiền</th>
                                 <th>Trạng thái</th>
+                                <th>Hình thức vận chuyển</th>
                                 <th>Hành động</th>
                             </tr>
                             @foreach($orders as $order)
@@ -213,6 +220,7 @@
                                         <td>{{ $order->created_at }}</td>
                                         <td>{{ number_format($order->total) }}</td>
                                         <td style="color: #0c5460">Đang giao</td>
+                                        <td>{{ \App\Helper\Helper::active2($order->type) }}</td>
                                         <td>
                                             <a class="btn btn-primary btn-sm" href="/orders/show_detail/{{$order->id}}">
                                                 Xem
@@ -242,6 +250,9 @@
                                         <td>
                                             <a class="btn btn-primary btn-sm" href="/orders/show_detail/{{$order->id}}">
                                                 Xem
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" href="/orders/return_goods/{{$order->id}}">
+                                                Hoàn trả hàng
                                             </a>
                                         </td>
                                     </tr>

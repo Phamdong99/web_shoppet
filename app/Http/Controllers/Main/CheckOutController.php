@@ -5,55 +5,104 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CheckOut\CreateFormRequest;
 use App\Models\Cart;
+use App\Models\Discount;
 use App\Models\Member;
 use App\Models\PaymentMethod;
+use App\Models\Transport;
 use App\Services\CheckoutService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
-use phpDocumentor\Reflection\Types\True_;
+use App\Services\ProductService;
 
 class CheckOutController extends Controller
 {
     protected $checkoutService;
+    protected $productService;
 
-    public function __construct(CheckoutService $checkoutService)
+    public function __construct(CheckoutService $checkoutService, ProductService $productService)
     {
         $this->checkoutService = $checkoutService;
+        $this->productService = $productService;
     }
 
     public function index(Request $request)
     {
-        $id_product = $request->id_product;
-        Session::put('id_product', $id_product);
-        return response()->json($id_product,200);
+        $arrProduct = $request->arrProduct;
+
+        $new_array = array();
+
+        foreach ($arrProduct as $key => $value) {
+            if (is_null($value) === false) {
+                $new_array[$key] = $value;
+            }
+        }
+        Session::put('arrProduct', $new_array);
+        return response()->json($arrProduct,200);
+
     }
 
     public function checkout()
     {
         $payment_method = $this->checkoutService->getPay();
-        $id_product = Session::get('id_product');
-
+        $discounts = $this->checkoutService->getDis();
+        $transports = $this->checkoutService->getTran();
+        $arrProduct =  Session::get('arrProduct');
+        $idproduct = array_keys($arrProduct);
         $productCheck = [];
-        if($id_product){
-            $productCheck = Product::whereIn('id', $id_product)->get();
-        }
-
+            if($idproduct){
+                $productCheck = Product::whereIn('id', $idproduct)->get();
+            }else{
+                Session::flash('error','Bạn cần chọn sản phẩm trước khi thanh toán');
+                return redirect('/carts');
+            }
         return view('main.check_out', [
             'title' => 'Trang thanh toán',
             'products' => $productCheck,
             'carts'=> Session::get('carts'),
-            'payment_methods'=> $payment_method
+            'payment_methods'=> $payment_method,
+            'discounts'=>$discounts,
+            'transports'=>$transports,
+            'arrproduct'=>$arrProduct
         ]);
+    }
+
+    public function discount_price(Request $request)
+    {
+        $id_discount = $request->input('id_discount');
+        $discount = Discount::where('id', $id_discount)->first();
+
+        Session::put('id_discount', $id_discount);
+        $total = $request->input('total');
+        if($total){
+            $total -= $discount->discount;
+        }
+
+        return response()->json($total, 200);
+
+    }
+    public function transport_price(Request $request)
+    {
+        $type_cost = $request->input('cost');
+        $transports = Transport::where('id', $type_cost)->first();
+
+        Session::put('type_cost', $type_cost);
+
+        $total = $request->input('total');
+        if($total){
+            $total += $transports->price;
+        }
+
+
+        return response()->json(['total'=>$total, 'transports'=>$transports], 200);
 
     }
 
     public function addCart(CreateFormRequest $request)
     {
         $pay_id = (int)$request->input('pay_id');
-
         $result = $this->checkoutService->addCart($request);
         if($result){
             if($pay_id == 2){

@@ -20,20 +20,20 @@
                 <textarea name="content" id="content" class=form-control>{{$product->content}}</textarea>
             </div>
 
-            <div class="form-group">
-                <label for="menu">Giá sản phẩm</label>
-                <input type="text" class="form-control" name="price" value="{{$product->price}}" placeholder="Giá sản phẩm">
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="menu">Giá sản phẩm</label>--}}
+{{--                <input type="text" class="form-control" name="price" value="{{$product->price}}" placeholder="Giá sản phẩm">--}}
+{{--            </div>--}}
 
-            <div class="form-group">
-                <label for="menu">Giá sản phẩm đã giảm giá</label>
-                <input type="text" class="form-control" name="price_sale" value="{{$product->price_sale}}" placeholder="Giá sản phẩm đã giảm giá">
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="menu">Giá sản phẩm đã giảm giá</label>--}}
+{{--                <input type="text" class="form-control" name="price_sale" value="{{$product->price_sale}}" placeholder="Giá sản phẩm đã giảm giá">--}}
+{{--            </div>--}}
 
-            <div class="form-group">
-                <label for="menu">Tổng sản phẩm</label>
-                <input type="number" class="form-control" name="qty" value="{{$product->qty}}" placeholder="Tổng sản phẩm">
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <label for="menu">Tổng sản phẩm</label>--}}
+{{--                <input type="number" class="form-control" name="qty" value="{{$product->qty}}" placeholder="Tổng sản phẩm">--}}
+{{--            </div>--}}
 
             <div class="form-group">
                 <label for="menu">Ảnh</label>

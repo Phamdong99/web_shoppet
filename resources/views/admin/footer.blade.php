@@ -76,7 +76,6 @@
         });
     });
 </script>
-
 <script>
     //getAttribute() : trả về phần tử được chỉ định
     //target lựa chọn phần tử được chỉ định
@@ -112,4 +111,5 @@
         })
     })
 </script>
+
 @yield('footer')

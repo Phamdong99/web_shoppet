@@ -51,6 +51,13 @@ class Helper
         return $active == 0 ? '<span class="" style="color: red">Không hoạt động</span>'
             : '<span class="" style="color: #00A000">Hoạt động</span>';
     }
+    public static function active2($type = 1)
+    {
+        if($type == 1) {
+            return "Giao hàng nhanh";
+        }
+        else{ return "Giao hàng tiết kiệm";}
+    }
 
     public static function active1($active = 1)
     {
@@ -112,18 +119,17 @@ class Helper
         if($price != 0) return number_format($price).'Vnd' ;
         return '<a href="/contacts">Liên Hệ</a>';
     }
-//    public static function price1($price = 0, $price_sale = 0)
-//    {
-//        if($price_sale != 0) return number_format($price_sale).'Vnd';
-//        if($price != 0) return number_format($price).'Vnd' ;
-//        return '<a href="/contacts">Liên Hệ</a>';
-//    }
+
     public static function price2($price = 0, $price_sale = 0)
     {
         if($price_sale != 0) return $price_sale;
         if($price != 0) return $price;
         return '<a href="/contacts">Liên Hệ</a>';
     }
-
+    public static function price3($price = 0)
+    {
+        if($price != 0) return number_format($price). 'Vnd';
+        return '<a href="/contacts">Liên Hệ</a>';
+    }
 
 }

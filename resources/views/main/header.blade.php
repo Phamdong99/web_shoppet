@@ -13,14 +13,15 @@
                     <a href="/member/information" class="flex-c-m trans-04 p-lr-25">
                         Tài khoản
                     </a>
-
+                    @if((Auth::guard('member')->user()->id)??'')
+                        <a href="/member/logout" class="flex-c-m trans-04 p-lr-25">
+                            Đăng xuất
+                        </a>
+                    @else
                     <a href="/member/login" class="flex-c-m trans-04 p-lr-25">
                         Đăng nhập
                     </a>
-
-                    <a href="/member/logout" class="flex-c-m trans-04 p-lr-25">
-                        Đăng xuất
-                    </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -57,12 +58,17 @@
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
                         <i class="zmdi zmdi-search"></i>
                     </div>
-
+                    @if((Auth::guard('member')->user()->id)??'')
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
                          data-notify="{{  !is_null(\Session::get('carts')) ? count(\Illuminate\Support\Facades\Session::get('carts')) : 0  }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
                     </div>
-
+                    @else
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+                             data-notify="0">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                        </div>
+                    @endif
                 </div>
             </nav>
         </div>

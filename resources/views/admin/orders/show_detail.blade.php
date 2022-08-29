@@ -41,7 +41,7 @@
             @endforeach
             <tr>
                 <td colspan="4" class="text-right">Tổng Tiền : </td>
-                <td>{{ number_format($total, 0, '', '.')  }} VND</td>
+                <td>{{ number_format($total, 0, '', '.')  }} VND <span>(Đã bao gồm cả phí vận chuyển)</span></td>
             </tr>
             <tr>
                 <td colspan="4" class="text-right">Trạng thái : </td>
